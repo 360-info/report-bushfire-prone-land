@@ -20,4 +20,5 @@ Thumbs.db
 !/out
 
 # ignore data  
-data/
+/data/*
+!/data/README.md
