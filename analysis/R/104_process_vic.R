@@ -1,31 +1,30 @@
-#' Process SA
+#' Process VIC
 #' Read in the suburbs data, and the state bushfire prone area.
 #' Intersect both datasets and calculate area statistics
 
 
 # suburb data -------------------------------------------
 
-sa_subs <- read_sf("data/final/abs_suburbs.gpkg") |>
-    filter(STE_CODE21 == 4) # SA State Code
+vic_subs <- read_sf("data/final/abs_suburbs.gpkg") |>
+    filter(STE_CODE21 == 2) # VIC State Code
 
 
 # bushfire data -------------------------------------------
 
-sa_bf <- read_sf("data/staging/sa/BushfireProtectionAreas_GDA2020.shp") |>
+vic_bf <- read_sf("data/staging/vic/bfp/ll_gda94/esrishape/whole_of_dataset/victoria/PLANNING/BUSHFIRE_PRONE_AREA.shp") |>
     st_transform("EPSG:7855") |>
     mutate(
-        state = "SA",
-        rating = bf_code
+        state = "VIC",
+        rating = "default"
     ) |>
     select(state, rating)  |>
-    st_make_valid()  |>
+   # st_make_valid()  |>
     st_union()  |>
     st_as_sf()
 
-
 # intersect ---------------------------------------------
 
-inter <- st_intersection(sa_subs, sa_bf) |>
+inter <- st_intersection(vic_subs, vic_bf) |>
     mutate(
         bf_area = units::set_units(st_area(geom), "km2"),
     ) |>
@@ -35,7 +34,7 @@ inter <- st_intersection(sa_subs, sa_bf) |>
 
 # final suburb level dataset ----------------------------
 
-final <- sa_subs |>
+final <- vic_subs |>
     left_join(inter, by = "SAL_CODE21") |>
     mutate(
         bf_area_pct = as.numeric(bf_area / area),
@@ -43,4 +42,4 @@ final <- sa_subs |>
     ) |>
     st_transform("EPSG:3857")
 
-write_sf(final, "data/final/sa.gpkg")
+write_sf(final, "data/final/vic.gpkg")
