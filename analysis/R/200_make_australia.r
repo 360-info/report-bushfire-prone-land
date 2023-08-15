@@ -8,6 +8,7 @@ wa <- read_sf("data/final/wa.gpkg")
 vic <- read_sf("data/final/vic.gpkg")
 tas <- read_sf("data/final/tas.gpkg")
 nsw <- read_sf("data/final/nsw.gpkg")
+qld <- read_sf("data/final/qld.gpkg")
 
 aus <- bind_rows(
     act,
@@ -16,9 +17,12 @@ aus <- bind_rows(
     wa,
     vic,
     tas,
-    nsw
+    nsw,
+    qld
 )
 
 write_sf(aus, "data/final/aus.gpkg")
 
-mapview(aus, zcol = "bf_area_pct")
+
+pal <- mapviewPalette("mapviewRasterColors")
+mapview(aus, zcol = "bf_area_pct", col.regions = pal(100))

@@ -1,18 +1,87 @@
 ---
-title: Untitled
-subtitle: A slightly longer title
+title: Bushfire Prone Land
+subtitle: Australian suburbs and their bushfire prone land coverage
 format:
   360-analysis-html: default
-author: James Goldie
+author: Dean Marchiori
 date: last-modified
 code-fold: true
 ---
 
 ## Introduction
 
-*TODO* Create an example file that demonstrates the formatting and features of your format.
+Each state in Australia maintains a spatial dataset of 'Bushfire Prone Land' or similar. These data are used to inform
+planning, risk and building decisions. The implementation of this instrument varies considerably state to state. 
 
-## More Information
+This visualisation shows the proportion of bushfire prone land in each Australian suburb.
 
-You can learn more about controlling the appearance of HTML output here: <https://quarto.org/docs/output-formats/html-basics.html>
+```{r}
+#| echo: false
+#| message: false
+#| warning: false 
+library(sf)
+library(tidyverse)
+library(tmap)
+```
 
+```{r}
+#| echo: false
+
+aus <- read_sf(here::here("data/final/aus.gpkg")) |>
+    filter(
+        !st_is_empty(geom)
+    ) |>
+    mutate(`Bushfire Prone Area (%)` = bf_area_pct)
+
+```
+
+```{r}
+#| out-width: 100%
+tm_shape(aus) +
+tm_polygons(col = "Bushfire Prone Area (%)", fill.alpha = 0.3)
+```
+
+## Case Study: NSW Fire History  
+
+Exploring the context of fire history in rural NSW following the highly catastrophic 2019/20 bushfires  
+
+
+```{r}
+fires <- read_sf(here::here("data/final/fire_history.gpkg"))
+```
+
+Fire counts by year since records began
+
+```{r}
+fires |>
+    st_drop_geometry() |>
+    count(type, year) |>
+    ggplot(aes(year, n, fill = type)) +
+    geom_col() +
+    facet_wrap(~type, ncol = 1)
+```
+
+Sketchy data collection 100 years ago, trying last x years
+
+- could we overlay el-nino cycles?
+
+```{r}
+fires |>
+    st_drop_geometry() |>
+    count(type, year) |>
+    filter(year >= 1980) |>
+    ggplot(aes(year, n, fill = type)) +
+    geom_col() +
+    facet_wrap(~type, ncol = 1)
+```
+
+Animate this?
+
+```{r}
+fires  |>
+filter(year >= 2017, year < 2020)  |>
+ggplot() +
+geom_sf(aes(fill = type)) +
+facet_wrap( ~ year) +
+theme_void()
+```

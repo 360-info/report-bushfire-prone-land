@@ -5,6 +5,9 @@
 # ABS Suburbs data
 unzip("data/raw/SAL_2021_AUST_GDA2020_SHP.zip", exdir = "data/staging/ABS")
 
+# Fire History
+unzip("data/raw/fire_npwsfirehistory.zip", exdir = "data/staging/fire_history")
+
 # ACT
 unzip("data/raw/act_bf_raw.zip", exdir = "data/staging/act")
 
