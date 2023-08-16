@@ -24,5 +24,4 @@ aus <- bind_rows(
 write_sf(aus, "data/final/aus.gpkg")
 
 
-pal <- mapviewPalette("mapviewRasterColors")
-mapview(aus, zcol = "bf_area_pct", col.regions = pal(100))
+

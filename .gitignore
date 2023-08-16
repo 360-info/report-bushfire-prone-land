@@ -21,4 +21,7 @@ Thumbs.db
 
 # ignore data  
 /data/*
-!/data/README.md
+!/data/README.md  
+
+# working file 
+TODO.txt
