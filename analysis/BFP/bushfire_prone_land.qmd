@@ -1,0 +1,46 @@
+---
+title: Bushfire Prone Land
+subtitle: Australia wide
+format:
+  360-analysis-html: default
+author: Dean Marchiori
+date: last-modified
+code-fold: true
+---
+
+Load required packages
+```{r}
+source(here::here("analysis/BFP/R/001_packages.R"))
+```
+
+The raw data for this project exists in `data/raw` see `data/README.md` for details.  
+
+This script unzips each state's individual spatial files and caches them in `data/staging`
+```{r}
+source(here::here("analysis/BFP/R/002_unzip_raw.R"))
+```
+
+The following scrips read in the state by state data, and intersect it with the ABS suburbs shapefile. 
+
+WARNING: This takes several hours to run. Evaluation of this chunk is suppressed. 
+
+```{r}
+#| eval: false
+
+source(here::here("analysis/BFP/R/100_process_suburbs.R"))
+source(here::here("analysis/BFP/R/101_process_act.R"))
+source(here::here("analysis/BFP/R/102_process_nt.R"))
+source(here::here("analysis/BFP/R/103_process_wa.R"))
+source(here::here("analysis/BFP/R/104_process_vic.R"))
+source(here::here("analysis/BFP/R/105_process_nsw.R"))
+source(here::here("analysis/BFP/R/106_process_qld.R"))
+source(here::here("analysis/BFP/R/107_process_sa.R"))
+source(here::here("analysis/BFP/R/108_process_tas.R"))
+
+```
+
+Combining these into an Australia wide suburb level dataset
+
+```{r}
+source(here::here("analysis/BFP/R/200_make_australia.R"))
+```

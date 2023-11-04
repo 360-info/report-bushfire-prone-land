@@ -10,6 +10,8 @@ tas <- read_sf("data/final/tas.gpkg")
 nsw <- read_sf("data/final/nsw.gpkg")
 qld <- read_sf("data/final/qld.gpkg")
 
+st_layers("data/final/nsw.gpkg")
+
 aus <- bind_rows(
     act,
     nt,
