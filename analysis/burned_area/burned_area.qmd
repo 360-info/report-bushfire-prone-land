@@ -1,0 +1,44 @@
+---
+title: NSW Fire History
+subtitle: A combined fires layer for NSW from all bush fire fighting agencies.
+format:
+  360-analysis-html: default
+author: Dean Marchiori
+date: last-modified
+code-fold: true
+---
+
+```{r}
+library(tidyverse)
+library(sf)
+library(mapview)
+library(here)
+```
+
+Unzip raw data. See `data/README.md` for details.  
+
+```{r}
+unzip(here("data/raw/fire_npwsfirehistory.zip"),
+    exdir = here("data/staging/fire_history")
+)
+```
+
+Read in data  
+
+```{r}
+fires_raw <- read_sf(here("data/staging/fire_history/NPWSFireHistory.shp"))
+```
+
+Process data  
+
+```{r}
+fires_raw |>
+    select(label = Label) |>
+    separate(label, into = c("year", "type"), sep = "(?<=\\d) ") |>
+    mutate(year = as.numeric(substr(year, 1, 4))) |>
+    st_transform("EPSG:3857") |>
+    write_sf(here("data/final/fire_history.gpkg"))
+```
+
+
+
