@@ -1,0 +1,14 @@
+{
+  "hash": "87cff49efb540f394bde08d75493da09",
+  "result": {
+    "markdown": "---\ntitle: Bushfire Prone Land\nsubtitle: Australia wide\nformat:\n  360-analysis-html: default\nauthor: Dean Marchiori\ndate: last-modified\ncode-fold: true\n---\n\n\nLoad required packages\n\n::: {.cell}\n\n```{.r .cell-code}\nsource(here::here(\"analysis/BFP/R/001_packages.R\"))\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors\nLinking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE\n\nudunits database from /usr/share/xml/udunits/udunits2.xml\n\nhere() starts at /home/wavedatalabs/Documents/wd/report-bushfire-prone-land\n```\n:::\n:::\n\n\nThe raw data for this project exists in `data/raw` see `data/README.md` for details.  \n\nThis script unzips each state's individual spatial files and caches them in `data/staging`\n\n::: {.cell}\n\n```{.r .cell-code}\nsource(here::here(\"analysis/BFP/R/002_unzip_raw.R\"))\n```\n:::\n\n\nThe following scrips read in the state by state data, and intersect it with the ABS suburbs shapefile. \n\nWARNING: This takes *many* hours to run. Evaluation of this chunk is suppressed. \n\n\n::: {.cell}\n\n```{.r .cell-code}\nsource(here::here(\"analysis/BFP/R/100_process_suburbs.R\"))\nsource(here::here(\"analysis/BFP/R/101_process_act.R\"))\nsource(here::here(\"analysis/BFP/R/102_process_nt.R\"))\nsource(here::here(\"analysis/BFP/R/103_process_wa.R\"))\nsource(here::here(\"analysis/BFP/R/104_process_vic.R\"))\nsource(here::here(\"analysis/BFP/R/105_process_nsw.R\"))\nsource(here::here(\"analysis/BFP/R/106_process_qld.R\"))\nsource(here::here(\"analysis/BFP/R/107_process_sa.R\"))\nsource(here::here(\"analysis/BFP/R/108_process_tas.R\"))\n```\n:::\n\n\nCombining these into an Australia wide suburb level dataset\n\n\n::: {.cell}\n\n```{.r .cell-code}\nsource(here::here(\"analysis/BFP/R/200_make_australia.R\"))\n```\n:::",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

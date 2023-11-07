@@ -1,0 +1,14 @@
+{
+  "hash": "a4e58ac331c5dd18b2005b62b504d451",
+  "result": {
+    "markdown": "---\ntitle: NSW Fire History\nsubtitle: A combined fires layer for NSW from all bush fire fighting agencies.\nformat:\n  360-analysis-html: default\nauthor: Dean Marchiori\ndate: last-modified\ncode-fold: true\n---\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.2     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.2     ✔ tidyr     1.3.0\n✔ purrr     1.0.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors\n```\n:::\n\n```{.r .cell-code}\nlibrary(sf)\n```\n\n::: {.cell-output .cell-output-stderr}\n```\nLinking to GEOS 3.10.2, GDAL 3.4.1, PROJ 8.2.1; sf_use_s2() is TRUE\n```\n:::\n\n```{.r .cell-code}\nlibrary(mapview)\n```\n\n::: {.cell-output .cell-output-stderr}\n```\nThe legacy packages maptools, rgdal, and rgeos, underpinning the sp package,\nwhich was just loaded, will retire in October 2023.\nPlease refer to R-spatial evolution reports for details, especially\nhttps://r-spatial.org/r/2023/05/15/evolution4.html.\nIt may be desirable to make the sf package available;\npackage maintainers should consider adding sf to Suggests:.\nThe sp package is now running under evolution status 2\n     (status 2 uses the sf package in place of rgdal)\n```\n:::\n\n```{.r .cell-code}\nlibrary(here)\n```\n\n::: {.cell-output .cell-output-stderr}\n```\nhere() starts at /home/wavedatalabs/Documents/wd/report-bushfire-prone-land\n```\n:::\n:::\n\n\nUnzip raw data. See `data/README.md` for details.  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nunzip(here(\"data/raw/fire_npwsfirehistory.zip\"),\n    exdir = here(\"data/staging/fire_history\")\n)\n```\n:::\n\n\nRead in data  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nfires_raw <- read_sf(here(\"data/staging/fire_history/NPWSFireHistory.shp\"))\n```\n:::\n\n\nProcess data  \n\n\n::: {.cell}\n\n```{.r .cell-code}\nfires_raw |>\n    select(label = Label) |>\n    separate(label, into = c(\"year\", \"type\"), sep = \"(?<=\\\\d) \") |>\n    mutate(year = as.numeric(substr(year, 1, 4))) |>\n    st_transform(\"EPSG:3857\") |>\n    write_sf(here(\"data/final/fire_history.gpkg\"))\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
