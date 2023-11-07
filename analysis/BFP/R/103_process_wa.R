@@ -5,13 +5,13 @@
 
 # suburb data -------------------------------------------
 
-wa_subs <- read_sf("data/final/abs_suburbs.gpkg") |>
+wa_subs <- read_sf(here("data/final/abs_suburbs.gpkg")) |>
     filter(STE_CODE21 == 5) # WA State Code
 
 
 # bushfire data -------------------------------------------
 
-wa_bf <- read_sf("data/staging/wa/Bush_Fire_Prone_Areas_2021_OBRM_019.shp") |>
+wa_bf <- read_sf(here("data/staging/wa/Bush_Fire_Prone_Areas_2021_OBRM_019.shp")) |>
     st_transform("EPSG:7855") |>
     mutate(
         state = "WA",
@@ -80,4 +80,4 @@ stopifnot(
 
 # Export data -------------------------------------------
 
-write_sf(final, "data/final/wa.gpkg")
+write_sf(final, here("data/final/wa.gpkg"))

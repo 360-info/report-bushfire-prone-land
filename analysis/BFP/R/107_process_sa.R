@@ -5,19 +5,19 @@
 
 # suburb data -------------------------------------------
 
-sa_subs <- read_sf("data/final/abs_suburbs.gpkg") |>
+sa_subs <- read_sf(here("data/final/abs_suburbs.gpkg")) |>
     filter(STE_CODE21 == 4) # SA State Code
 
 
 # bushfire data -------------------------------------------
 
-sa_bf <- read_sf("data/staging/sa/BushfireProtectionAreas_GDA2020.shp") |>
+sa_bf <- read_sf(here("data/staging/sa/BushfireProtectionAreas_GDA2020.shp")) |>
     st_transform("EPSG:7855") |>
     mutate(
         state = "SA",
         rating = bf_code
     ) |>
-    filter(bf_code != "Excluded")  |>
+    filter(bf_code != "Excluded") |> # this seems to be a metro exclusion
     select(state, rating) |>
     st_make_valid() |>
     st_union() |>
@@ -80,4 +80,4 @@ stopifnot(
 
 # Export data -------------------------------------------
 
-write_sf(final, "data/final/sa.gpkg")
+write_sf(final, here("data/final/sa.gpkg"))

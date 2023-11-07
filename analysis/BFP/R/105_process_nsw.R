@@ -5,13 +5,13 @@
 
 # suburb data -------------------------------------------
 
-nsw_subs <- read_sf("data/final/abs_suburbs.gpkg") |>
+nsw_subs <- read_sf(here("data/final/abs_suburbs.gpkg")) |>
     filter(STE_CODE21 == 1) # NSW State Code
 
 
 # bushfire data -------------------------------------------
 
-nsw_bf <- read_sf("data/staging/nsw/BFPL20230713.shp") |>
+nsw_bf <- read_sf(here("data/staging/nsw/BFPL20230713.shp")) |>
     st_transform("EPSG:7855") |>
     mutate(
         state = "NSW",
@@ -82,4 +82,4 @@ stopifnot(
 
 # Export data -------------------------------------------
 
-write_sf(final, "data/final/nsw.gpkg")
+write_sf(final, here("data/final/nsw.gpkg"))

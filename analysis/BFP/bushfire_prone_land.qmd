@@ -22,7 +22,7 @@ source(here::here("analysis/BFP/R/002_unzip_raw.R"))
 
 The following scrips read in the state by state data, and intersect it with the ABS suburbs shapefile. 
 
-WARNING: This takes several hours to run. Evaluation of this chunk is suppressed. 
+WARNING: This takes *many* hours to run. Evaluation of this chunk is suppressed. 
 
 ```{r}
 #| eval: false

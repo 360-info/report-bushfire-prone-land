@@ -5,12 +5,12 @@
 
 # suburb data -------------------------------------------
 
-tas_subs <- read_sf("data/final/abs_suburbs.gpkg") |>
+tas_subs <- read_sf(here("data/final/abs_suburbs.gpkg")) |>
     filter(STE_CODE21 == 6) # TAS State Code
 
 # bushfire data -------------------------------------------
 
-tas_bf_standard <- read_sf("data/staging/tas/bf/Tasmanian_Planning_Scheme_Code_Overlay_statewide.shp",
+tas_bf_standard <- read_sf(here("data/staging/tas/bf/Tasmanian_Planning_Scheme_Code_Overlay_statewide.shp"),
     query = "SELECT * FROM Tasmanian_Planning_Scheme_Code_Overlay_statewide WHERE OV_NAME = 'Bushfire-prone areas'"
 ) |>
     st_transform("EPSG:7855") |>
@@ -20,7 +20,7 @@ tas_bf_standard <- read_sf("data/staging/tas/bf/Tasmanian_Planning_Scheme_Code_O
     ) |>
     select(state, rating)
 
-tas_bf_interim <- read_sf("data/staging/tas/bf1/interim_planning_scheme_overlay_statewide.shp",
+tas_bf_interim <- read_sf(here("data/staging/tas/bf1/interim_planning_scheme_overlay_statewide.shp"),
     query = "SELECT * FROM interim_planning_scheme_overlay_statewide WHERE O_NAME = 'Bushfire Prone Areas'"
 ) |>
     st_transform("EPSG:7855") |>
@@ -92,4 +92,4 @@ stopifnot(
 
 # Export data -------------------------------------------
 
-write_sf(final, "data/final/tas.gpkg")
+write_sf(final, here("data/final/tas.gpkg"))

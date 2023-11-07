@@ -1,22 +1,22 @@
 #' Process NT
-#' Read in the suburbs data, and the state bushfire prone area. 
-#' Intersect both datasets and calculate area statistics 
+#' Read in the suburbs data, and the state bushfire prone area.
+#' Intersect both datasets and calculate area statistics
 
 
 # suburb data -------------------------------------------
 
-nt_subs <- read_sf("data/final/abs_suburbs.gpkg") |>
+nt_subs <- read_sf(here("data/final/abs_suburbs.gpkg")) |>
     filter(STE_CODE21 == 7) # NT State Code
 
 # bushfire data -------------------------------------------
 
-nt_bf <- read_sf("data/staging/nt/Boundaries/Datasets/ESRI/Bushfires_NT/Fire_Protection_Zones.shp") |>
+nt_bf <- read_sf(here("data/staging/nt/Boundaries/Datasets/ESRI/Bushfires_NT/Fire_Protection_Zones.shp")) |>
     st_transform("EPSG:7855") |>
     mutate(
         state = "NT",
         rating = "default"
     ) |>
-    select(state, rating)  |>
+    select(state, rating) |>
     st_as_sf()
 
 # intersect ---------------------------------------------
@@ -26,9 +26,9 @@ inter <- st_intersection(nt_subs, nt_bf) |>
         bf_area = units::set_units(st_area(geom), "km2"),
     ) |>
     select(SAL_CODE21, bf_area) |>
-        st_drop_geometry() |>
-        group_by(SAL_CODE21) |>
-        summarise(bf_area = sum(bf_area), .groups = 'drop')
+    st_drop_geometry() |>
+    group_by(SAL_CODE21) |>
+    summarise(bf_area = sum(bf_area), .groups = "drop")
 
 
 # final suburb level dataset ----------------------------
@@ -75,4 +75,4 @@ stopifnot(
 
 # Export data -------------------------------------------
 
-write_sf(final, "data/final/nt.gpkg")
+write_sf(final, here("data/final/nt.gpkg"))

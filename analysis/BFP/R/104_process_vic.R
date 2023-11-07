@@ -5,20 +5,20 @@
 
 # suburb data -------------------------------------------
 
-vic_subs <- read_sf("data/final/abs_suburbs.gpkg") |>
+vic_subs <- read_sf(here("data/final/abs_suburbs.gpkg")) |>
     filter(STE_CODE21 == 2) # VIC State Code
 
 
 # bushfire data -------------------------------------------
 
-vic_bf <- read_sf("data/staging/vic/bfp/ll_gda94/esrishape/whole_of_dataset/victoria/PLANNING/BUSHFIRE_PRONE_AREA.shp") |>
+vic_bf <- read_sf(here("data/staging/vic/bfp/ll_gda94/esrishape/whole_of_dataset/victoria/PLANNING/BUSHFIRE_PRONE_AREA.shp")) |>
     st_transform("EPSG:7855") |>
     mutate(
         state = "VIC",
         rating = "default"
     ) |>
     select(state, rating) |>
-    # st_make_valid()  |>
+    st_make_valid() |>
     st_union() |>
     st_as_sf()
 
@@ -79,4 +79,4 @@ stopifnot(
 
 # Export data -------------------------------------------
 
-write_sf(final, "data/final/vic.gpkg")
+write_sf(final, here("data/final/vic.gpkg"))

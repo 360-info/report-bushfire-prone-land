@@ -5,13 +5,13 @@
 
 # suburb data -------------------------------------------
 
-act_subs <- read_sf("data/final/abs_suburbs.gpkg") |>
+act_subs <- read_sf(here("data/final/abs_suburbs.gpkg")) |>
     filter(STE_CODE21 == 8) # ACT State Code
 
 
 # bushfire data -------------------------------------------
 
-act_bf <- read_sf("data/staging/act/Bushfire_Prone_Areas.shp") |>
+act_bf <- read_sf(here("data/staging/act/Bushfire_Prone_Areas.shp")) |>
     st_transform("EPSG:7855") |>
     mutate(
         state = "ACT",
@@ -77,4 +77,4 @@ stopifnot(
 
 # Export data -------------------------------------------
 
-write_sf(final, "data/final/act.gpkg")
+write_sf(final, here("data/final/act.gpkg"))

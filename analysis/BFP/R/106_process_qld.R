@@ -5,14 +5,13 @@
 
 # suburb data -------------------------------------------
 
-qld_subs <- read_sf("data/final/abs_suburbs.gpkg") |>
+qld_subs <- read_sf(here("data/final/abs_suburbs.gpkg")) |>
     filter(STE_CODE21 == 3) # QLD State Code
 
 
 # bushfire data -------------------------------------------
 
 qld_process_bf <- function(path, suburbs) {
-
     qld_bf <- read_sf(path) |>
         st_transform("EPSG:7855") |>
         mutate(
@@ -31,12 +30,12 @@ qld_process_bf <- function(path, suburbs) {
     return(inter)
 }
 
-qld_files <- list.files("data/staging/qld",
+qld_files <- list.files(here("data/staging/qld"),
     pattern = ".shp$",
     full.names = TRUE
 )
 
-inter <- purrr::map_dfr(qld_files, ~qld_process_bf(.x, qld_subs))
+inter <- purrr::map_dfr(qld_files, ~ qld_process_bf(.x, qld_subs))
 
 inter_unique <- inter |>
     group_by(SAL_CODE21) |>
@@ -97,4 +96,4 @@ stopifnot(
 
 # Export data -------------------------------------------
 
-write_sf(final, "data/final/qld.gpkg")
+write_sf(final, here("data/final/qld.gpkg"))
