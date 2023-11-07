@@ -17,6 +17,7 @@ The raw data for this project exists in `data/raw` see `data/README.md` for deta
 
 This script unzips each state's individual spatial files and caches them in `data/staging`
 ```{r}
+#| eval: false
 source(here::here("analysis/BFP/R/002_unzip_raw.R"))
 ```
 
