@@ -1,9 +1,21 @@
 # Bushfire Prone Land
-### [📋&nbsp;Add&nbsp;graphic&nbsp;to&nbsp;your&nbsp;story]([report_share_url]) • [📊&nbsp;Get&nbsp;the&nbsp;data](data) • [💻&nbsp;Reproduce&nbsp;the&nbsp;analysis](#-reproduce-the-analysis)
+### [📊&nbsp;Get&nbsp;the&nbsp;data](data) • [💻&nbsp;Reproduce&nbsp;the&nbsp;analysis](#-reproduce-the-analysis)
 
-[report_summary]
+## Living with fire   
 
-[report_graphic_and_link]
+As the climate heats up, severe fire weather is getting worse in many parts of the world.
+
+The effort of fighting fiercer fires for longer is putting strain on firefighting forces, and their resources with which to prepare are shrinking. They can no longer rely on backup from less affected countries, as northern and southern hemisphere fire seasons are beginning to overlap, and with fewer days in which to do prescribed burning, it’s getting harder to manage the fuel available for potential fires.
+
+For Australia, the return of El Niño and a positive Indian Ocean Dipole primes the country for hotter, drier conditions—and with them, higher fire danger. Many communities flagged for higher risk are still recovering from devastating floods last year.
+
+As the country prepares for a hot, dry summer, 360info looks at what’s changing and the lessons fire authorities are applying to fight the next set of fires.  
+
+## Bushfire Prone Land  
+
+This Australia-wide dataset combines all state and territory agency datasets describing land areas classified as 'Bushfire Prone'. Definitions and methodologies vary widely from state-to-state. This map attempts to unify the basic definitions to contrast policy and highlight considerations for planning, the built environment and living with fire.  
+
+![](img/img.png)
 
 ## ♻️ Use + Remix rights
 
