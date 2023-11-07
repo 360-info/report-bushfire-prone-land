@@ -27,7 +27,7 @@ These charts, as well as the analyses that underpin them, are available under a 
 
 Data in these charts comes from:
 
-* [report_datasources_links]
+* See `data/README.md`
 
 **Please attribute 360info and the data sources when you use and remix these visualisations.**
 
@@ -71,4 +71,4 @@ quarto render
 
 ## ❓ Help
 
-If you find any problems with our analysis or charts, please feel free to [create an issue](https://github.com/360-info/[report repo name]/issues/new)!
+If you find any problems with our analysis or charts, please feel free to [create an issue](https://github.com/360-info/report-bushfire-prone-land/issues/new)!
