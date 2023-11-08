@@ -1,5 +1,5 @@
 ---
-title: NSW Fire History
+title: Fire History
 subtitle: A combined fires layer for NSW from all bush fire fighting agencies.
 format:
   360-analysis-html: default
@@ -15,29 +15,42 @@ library(mapview)
 library(here)
 ```
 
-Unzip raw data. See `data/README.md` for details.  
-
-```{r}
-unzip(here("data/raw/fire_npwsfirehistory.zip"),
-    exdir = here("data/staging/fire_history")
-)
-```
-
 Read in data  
 
 ```{r}
-fires_raw <- read_sf(here("data/staging/fire_history/NPWSFireHistory.shp"))
+fires_raw <- read_sf(here("data/raw/fire_history/Historical_Bushfire_Boundaries.geojson"))
 ```
 
 Process data  
 
 ```{r}
-fires_raw |>
-    select(label = Label) |>
-    separate(label, into = c("year", "type"), sep = "(?<=\\d) ") |>
-    mutate(year = as.numeric(substr(year, 1, 4))) |>
-    st_transform("EPSG:3857") |>
-    write_sf(here("data/final/fire_history.gpkg"))
+
+fires <- fires_raw |>
+    filter(
+        fire_type == "Bushfire",
+        !is.na(ignition_date),
+        state == "NSW (New South Wales)"
+    ) |>
+    mutate(year = year(ignition_date)) |>
+    select(year)  |>
+    filter(year > 2000)  |>
+    st_make_valid()  |>
+    group_by(year)  |>
+    summarise(geometry = st_union(geometry))  |>
+    rmapshaper::ms_simplify(keep_shapes = TRUE)   
+
+library(gganimate)
+
+fires  |>
+st_set_crs(NA)  |>
+ggplot() +
+  geom_sf(aes(group = year), fill = "red", alpha = 0.4) +
+  theme_void() +
+  labs(title = "Year: {frame_time}") +
+  transition_time(year) +
+  gganimate::shadow_wake(0.25) 
+
+anim_save('out/map.gif')
 ```
 
 
