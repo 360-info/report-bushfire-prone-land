@@ -1,6 +1,12 @@
 project:
   type: website
   output-dir: out
+  render:
+    - map/index.qmd
+  resources:
+    - /data/suburb-tiles/*
+    - /data/suburb-tiles/*/*/*.pbf
+    - /data/bf-prone-processed.csv
   
 # only re-render if the source changes or if we specifically render that file
 execute:

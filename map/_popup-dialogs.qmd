@@ -1,0 +1,66 @@
+<!-- initialise miromodal.js -->
+
+::::::: {#modal-useremix .modal .micromodal-slide aria-hidden="true"}
+:::::: {.modal__overlay tabindex="-1" data-micromodal-close="true"}
+::::: {.modal__container role="dialog" aria-modal="true" aria-labelledby="modal-useremix-title"}
+
+<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+
+:::: {#modal-useremix-content}
+## Use + Remix
+
+These charts, as well as the analyses that underpin them, are available under a [**Creative Commons Attribution 4.0 licence**](https://creativecommons.org/licenses/by/4.0).
+
+Please acknowledge [360info](https://360info.org) and our data sources when you use these charts and data:
+
+* [NARCliM1.5: NSW DPIE](https://climatedata-beta.environment.nsw.gov.au/)
+
+#### Embed this chart in your article
+
+Copy and paste the following code:
+
+::: {.embedcode}
+```
+{{< var newsembed.before >}}{{< var newsembed.url >}}{{< var newsembed.after >}}
+```
+:::
+
+This content is subject to [360info's Terms of Use](https://newshub.360info.org/page/terms).
+
+#### Get the data and code
+
+Visit the [GitHub repository](https://github.com/360-info/report-template/tree/main/data) to:
+
+* [**Download the data**](https://github.com/360-info/report-template/tree/main/data)
+* [**Recreate or remix the chart**](https://github.com/360-info/report-template)
+::::
+
+:::::
+::::::
+:::::::
+
+<!-- notes dialog -->
+
+::::::: {#modal-about .modal .micromodal-slide aria-hidden="true"}
+:::::: {.modal__overlay tabindex="-1" data-micromodal-close="true"}
+::::: {.modal__container role="dialog" aria-modal="true" aria-labelledby="modal-about-title"}
+
+<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+
+<header>
+## About {#modal-about-title}
+</header>
+
+:::: {#modal-about-content}
+This map shows how a set of climate models estimate 35°C+ days will change across Australia in the coming decades. You can narrow in on a particular postcode.
+
+The data comes from [NARCliM1.5](https://doi.org/10.1029/2020EF001833), an experiment undertaking by the [NSW Department of Planning and Environment](https://www.dpie.nsw.gov.au) and the [Climate Change Research Centre](https://ccrc.unsw.edu.au).
+
+Because more than one climate models is used, we tell you the range of estimates among them.
+
+NARCLiM1.5 is used by scientists to compare against an earlier version of NARCliM, which had slightly less warming. **These estimates should therefore be considered an upper bound.**
+::::
+
+:::::
+::::::
+:::::::
