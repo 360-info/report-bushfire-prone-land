@@ -1,6 +1,6 @@
 ---
-title: Fire History
-subtitle: A combined fires layer for NSW from all bush fire fighting agencies.
+title: Historical Bushfire Boundaries
+subtitle: Locations and extents of historical bushfires and burning events, from Geoscience Australia (GA).
 format:
   360-analysis-html: default
 author: Dean Marchiori
@@ -11,47 +11,94 @@ code-fold: true
 ```{r}
 library(tidyverse)
 library(sf)
-library(mapview)
 library(here)
+library(gganimate)
+library(ggmap)
+library(themes360info)
 ```
 
-Read in data  
+Read in data. For source and info see `data/README.md`  
 
 ```{r}
 fires_raw <- read_sf(here("data/raw/fire_history/Historical_Bushfire_Boundaries.geojson"))
 ```
 
-Process data  
+Process data to keep SE Australia busfires only (not prescribed burns) from 2000 onwards. Many fires did not have an `ignition_date` so these were removed. 
 
 ```{r}
-
 fires <- fires_raw |>
     filter(
+        state %in% c(
+            "ACT (Australian Capital Territory)",
+            "NSW (New South Wales)", 
+            "VIC (Victoria)", 
+            "TAS (Tasmania)",
+            "QLD (Queensland)",
+            "SA (South Australia)"
+        ),
         fire_type == "Bushfire",
-        !is.na(ignition_date),
-        state == "NSW (New South Wales)"
+        !is.na(ignition_date)
     ) |>
     mutate(year = year(ignition_date)) |>
-    select(year)  |>
-    filter(year > 2000)  |>
-    st_make_valid()  |>
-    group_by(year)  |>
-    summarise(geometry = st_union(geometry))  |>
-    rmapshaper::ms_simplify(keep_shapes = TRUE)   
-
-library(gganimate)
-
-fires  |>
-st_set_crs(NA)  |>
-ggplot() +
-  geom_sf(aes(group = year), fill = "red", alpha = 0.4) +
-  theme_void() +
-  labs(title = "Year: {frame_time}") +
-  transition_time(year) +
-  gganimate::shadow_wake(0.25) 
-
-anim_save('out/map.gif')
+    select(year) |>
+    filter(year > 2000) |>
+    st_make_valid() |>
+    st_transform(3857)  |>
+    group_by(year) |>
+    summarise(geometry = st_union(geometry)) |>
+    rmapshaper::ms_simplify(keep_shapes = TRUE)
 ```
 
+Making an animated map with a satellite basemap. The basemap from from the Google API and requires an API key.  
 
+```{r}
+#| eval: false
+
+# Supply API key here
+# register_google(key = "xxx")
+
+map <- get_googlemap(
+    center = c(
+        lon = 144.5115485,
+        lat = -38.1184925
+    ),
+    zoom = 5, 
+    maptype = "satellite"
+)
+
+# Define a function to fix the bbox to be in EPSG:3857
+ggmap_bbox <- function(map) {
+  if (!inherits(map, "ggmap")) stop("map must be a ggmap object")
+  # Extract the bounding box (in lat/lon) from the ggmap to a numeric vector, 
+  # and set the names to what sf::st_bbox expects:
+  map_bbox <- setNames(unlist(attr(map, "bb")), 
+                       c("ymin", "xmin", "ymax", "xmax"))
+
+  # Coonvert the bbox to an sf polygon, transform it to 3857, 
+  # and convert back to a bbox (convoluted, but it works)
+  bbox_3857 <- st_bbox(st_transform(st_as_sfc(st_bbox(map_bbox, crs = 4326)), 3857))
+
+  # Overwrite the bbox of the ggmap object with the transformed coordinates 
+  attr(map, "bb")$ll.lat <- bbox_3857["ymin"]
+  attr(map, "bb")$ll.lon <- bbox_3857["xmin"]
+  attr(map, "bb")$ur.lat <- bbox_3857["ymax"]
+  attr(map, "bb")$ur.lon <- bbox_3857["xmax"]
+  map
+}
+
+# Use the function:
+map <- ggmap_bbox(map)
+
+# produce animation 
+anim <- ggmap(map) +
+    geom_sf(data = fires, aes(group = year), fill = "red", lwd = 0, alpha = 0.4, inherit.aes = FALSE) +
+    theme_void() +
+    transition_time(year) +
+    gganimate::shadow_wake(0.25) + 
+    labs(title = "Year: {round(frame_time,0)}") +
+    coord_sf(crs = st_crs(3857))
+
+# export as a library of pngs
+animate(anim, renderer = file_renderer(dir = "data/final/anim"), width = 6, height = 6, units = "in", res = 300)
+```
 
