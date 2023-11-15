@@ -56,13 +56,12 @@ anim <- ggplot() +
     geom_sf(data = fires, aes(group = year), fill = "red", lwd = 0, alpha = 0.4, inherit.aes = FALSE) +
     theme_void() +
     transition_time(year) +
-    gganimate::shadow_wake(0.25) +
+    gganimate::shadow_wake(0.1, wrap = FALSE, exclude_phase = NULL) +
     labs(title = "Year: {round(frame_time,0)}") +
     coord_sf(crs = st_crs(3857))
 
 # export as a library of pngs
 animate(anim, renderer = file_renderer(dir = "data/final/anim"), width = 6.4, height = 6, units = "in", res = 300, bg = "transparent")
-
 ```
 
 ## Additional WA zoom in  
@@ -89,10 +88,12 @@ anim_wa <- ggplot() +
     geom_sf(data = fires_wa, aes(group = year), fill = "red", lwd = 0, alpha = 0.4, inherit.aes = FALSE) +
     theme_void() +
     transition_time(year) +
-    gganimate::shadow_wake(0.25) +
+    gganimate::shadow_wake(0.1, wrap = FALSE, exclude_phase = NULL) +
     labs(title = "Year: {round(frame_time,0)}") +
     coord_sf(crs = st_crs(3857))
 
 # export as a library of pngs
 animate(anim_wa, renderer = file_renderer(dir = "data/final/anim_wa"), width = 6.4, height = 6, units = "in", res = 300, bg = "transparent")
+
 ```
+
