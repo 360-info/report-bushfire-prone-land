@@ -191,22 +191,18 @@ stats = FileAttachment("/data/bf-prone-processed.csv").csv({ typed: true });
 //| label: update-map
 
 yellowRedFill = [
-  0,   "#ffffb2",
-  5,   "#fed976",
-  10,  "#feb24c",
-  20,  "#fd8d3c",
-  40,  "#f03b20",
-  80,  "#bd0026"
-]
-yellowRedStroke = [
-  0,   "#ffff46",
-  5,   "#fdbf1a",
-  10,  "#f68e01",
-  20,  "#e86302",
-  40,  "#bf240d",
-  80,  "#8e001c"
-]
+ 0.0, "#ffffd4",
+ 0.2, "#fed98e",
+ 0.4, "#fe9929",
+ 0.6, "#d95f0e",
+ 0.8, "#993404"]
 
+yellowRedStroke = [
+  0.0, "#ffff76",
+  0.2, "#fdbe3f",
+  0.4, "#ea7c01",
+  0.6, "#ad4c0b",
+  0.8, "#7a2903"]
 
 // when the filtered data changes, rejoin it to the map tiles and update the
 // colour scheme
