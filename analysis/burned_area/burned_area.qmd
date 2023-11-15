@@ -22,6 +22,7 @@ Read in data. For source and info see `data/README.md`
 fires_raw <- read_sf(here("data/raw/fire_history/Historical_Bushfire_Boundaries.geojson"))
 ```
 
+
 Process data to keep SE Australia busfires only (not prescribed burns) from 2000 onwards. Many fires did not have an `ignition_date` so these were removed. 
 
 ```{r}
@@ -40,7 +41,7 @@ fires <- fires_raw |>
     ) |>
     mutate(year = year(ignition_date)) |>
     select(year) |>
-    filter(year > 2000) |>
+    filter(year > 1980) |>
     st_make_valid() |>
     st_transform(3857) |>
     group_by(year) |>
@@ -60,8 +61,7 @@ anim <- ggplot() +
     labs(title = "Year: {round(frame_time,0)}") +
     coord_sf(crs = st_crs(3857))
 
-# export as a library of pngs
-animate(anim, renderer = file_renderer(dir = "data/final/anim"), width = 6.4, height = 6, units = "in", res = 300, bg = "transparent")
+animate(anim, renderer = file_renderer(dir = "data/final/anim"), nframes = 200, width = 6.4, height = 6, units = "in", res = 300, bg = "transparent")
 ```
 
 ## Additional WA zoom in  
