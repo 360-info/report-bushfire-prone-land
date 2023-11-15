@@ -94,3 +94,11 @@ These data are the raw downloads from the state agencies
 **User Guide:** https://www.fire.tas.gov.au/Show?pageId=colBushfireProneAreas   
 **Licence:** [Creative Commons Attribution 3.0 Australia](https://creativecommons.org/licenses/by/3.0/au/)   
 **Date Accessed:** 2023-08-10   
+
+### Historical Bushfire Boundaries   
+Locations and extents of historical bushfires and burning events, from Geoscience Australia (GA).  
+
+**file:** `data/fire_history/Historical_Bushfire_Boundaries.geojson`   
+**Link:** https://digital.atlas.gov.au/datasets/f2553df517b24672bc931afc9f3f8ac3_17/about  
+**Licence:** [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/)  
+
