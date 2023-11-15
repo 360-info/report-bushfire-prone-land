@@ -22,6 +22,10 @@ Thumbs.db
 # ignore data  
 /data/*
 !/data/README.md  
+!/data/final
+/data/final/*
+!/data/final/anim/
+!/data/final/anim_wa/
 
 # working file 
 TODO.txt
