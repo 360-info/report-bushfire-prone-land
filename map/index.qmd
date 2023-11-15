@@ -10,10 +10,6 @@ resources:
   # - news-heat-postcodes-featuremedia.png
   - style.json
   - stripes.png
-  # - tiles/postcodes/*
-  # - tiles/postcodes/*/*/*.pbf
-  # - font/*
-  # - font/*/*
 ---
 
 ```{ojs}
@@ -79,25 +75,31 @@ viewof map = {
     container.value = map;
     container.dispatchEvent(new CustomEvent("input"));
 
-    map.addSource("suburbs", {
+    console.log("Map loaded; adding tiles")
+
+    map.addSource("suburbs-source", {
       "url": "/data/suburb-tiles/tiles.json",
       "type": "vector",
       "promoteId": "SAL_NAME21"
     });
 
-    // this layer shades all postcodes
+    // this layer shades all suburbs
     map.addLayer({
-      id: "suburb-colors",
-      source: "suburbs",
-      "source-layer": "suburbs-layer",
-      type: "fill"
+      id: "suburbs-colors",
+      source: "suburbs-source",
+      "source-layer": "suburbs",
+      type: "fill"//,
+      // paint: {
+      //   "fill-color": "#999999",
+      //   "fill-outline-color": "#666666"
+      // }
     });
 
     // add pattern for focused postcodes
-    map.loadImage("stripes.png", function(err, image) {
-      if (err) throw err;
-      map.addImage("focusStripes", image);
-    });
+    // map.loadImage("stripes.png", function(err, image) {
+    //   if (err) throw err;
+    //   map.addImage("focusStripes", image);
+    // });
 
     /* popup */
 
@@ -107,7 +109,7 @@ viewof map = {
       className: "map-popup"
     });
 
-    map.on("click", "suburb-colors", function(e) {
+    map.on("click", "suburbs-colors", function(e) {
       
       // change the cursor style as a ui indicator.
       console.log("Mouse entering...")
@@ -115,16 +117,16 @@ viewof map = {
 
       // display a warning if stats aren't available, or show them for
       // this layer if they are
+      const suburbName = e.features[0].properties.SAL_NAME21
+      const bfPercent = e.features[0].state.bf_area_pct.toLocaleString(undefined, {style: "percent"})
 
       const noDataMessage =
-        "We don't have data for " +
-          e.features[0].properties.SAL_NAME21 +
-          ", but try another suburb nearby.";
+        "We don't have data for " + suburbName +
+        ", but try another suburb nearby.";
 
       var dataMessage =
         "<h3>" + e.features[0].properties.SAL_NAME21 + "</h3>" +
-        // "<p>" +
-        "<p><strong>" + e.features[0].state.bf_pct_area + "%</strong> " +
+        "<p><strong>" + bfPercent + "</strong> " +
         "is classified as bushfire-prone.</p>"
 
       var description = 
@@ -136,36 +138,8 @@ viewof map = {
       // populate popup; locate based on mouse's back-projected position
       popup.setLngLat(e.lngLat).setHTML(description).addTo(map);
     });
-
   });
-
-
 }
-```
-
-```{ojs}
-//| label: controls
-//| classes: inputForm
-
-md`No controls needed`
-
-// viewof selectedPeriod = Inputs.radio(
-//   new Map([
-//     ["1995",           "1995"],
-//     ["Change in 2030", "2030"],
-//     ["Change in 2050", "2050"]
-//   ]),
-//   { value: "1995" });
-
-// viewof selectedScenario = Inputs.radio(
-//   new Map([
-//     ["Medium emissions", "rcp45diff"],
-//     ["High emissions", "rcp85diff"]
-//   ]),
-//   { value: "rcp45diff", disabled: selectedPeriod == "1995" })
-
-// override scenario with historical if 1995 is selected
-// actualScenario = (selectedPeriod == "1995" ? "historical" : selectedScenario)
 ```
 
 ```{ojs}
@@ -202,27 +176,15 @@ mutable tileSearchFailed = false;
 areaWarn =
   tileSearchFailed ?
     md`🔍 This suburb's either very small or not in view — zoom in or out a bit and search again.` :
-    areaSearch.length == 0 ? md`❌ No areas matched this search` : md``
+    areaSearch.length == 0 ?
+      md`❌ No areas matched this search` :
+      md``
 ```
 
 
 ```{ojs}
 //| label: get-data
-stats = FileAttachment("/data/bf-prone-processed.csv")
-  .csv({ typed: true });
-
-// postcodeSuburbMap = FileAttachment("/data/postcode-suburb-map.csv")
-//   .csv();
-// postcodeList = FileAttachment("/data/postcode-list.csv").csv();
-
-// filter data here (note postcodes need to be re-padded b/c observable's type
-// inference makes them numeric)
-filteredstats = stats
-  // .filter(
-  //   d =>
-  //     (d.file_period == selectedPeriod) &&
-  //     (d.file_scenario == actualScenario))
-  // .map(d => ({ ...d, postcode: String(d.SAL_NAME21).padStart(4, "0") }));
+stats = FileAttachment("/data/bf-prone-processed.csv").csv({ typed: true });
 ```
 
 ```{ojs}
@@ -250,67 +212,34 @@ yellowRedStroke = [
 // colour scheme
 updateMapData = {
 
-  filteredstats.forEach(row => {
+  stats.forEach(row => {
     map.setFeatureState(
       {
-        source: "suburbs",
-        sourceLayer: "suburbs-layer",
+        source: "suburbs-source",
+        sourceLayer: "suburbs",
         id: row.SAL_NAME21,
       },
       {
-        bf_area: row.bf_area,
+        bf_area:row.bf_area,
         bf_area_pct: row.bf_area_pct
       }
     );
   });
 
-  map.setPaintProperty("suburb-colors", "fill-color",
-    ["case", ["==", ["feature-state", "bf_area_pct"], null], "#666666",
+  map.setPaintProperty("suburbs-colors", "fill-color",
+    ["case", ["==",
+      ["feature-state", "bf_area_pct"], null],
+      "#666666",
       ["interpolate", ["linear"], ["feature-state", "bf_area_pct"],
         ...yellowRedFill]
     ])
-  map.setPaintProperty("suburb-colors", "fill-outline-color",
-    ["case", ["==", ["feature-state", "bf_area_pct"], null], "#666666",
+  map.setPaintProperty("suburbs-colors", "fill-outline-color",
+    ["case", ["==",
+      ["feature-state", "bf_area_pct"], null],
+      "#666666",
       ["interpolate", ["linear"], ["feature-state", "bf_area_pct"],
         ...yellowRedStroke]
     ]);
-
-  // if (actualScenario.endsWith("diff")) {
-  //     // extra days in future: yellow-red
-  //     console.log(actualScenario + ": switching to yellow-red")
-  //     map.setPaintProperty("suburb-colors", "fill-color",
-  //       ["case", ["==", ["feature-state", "ensmean"], null], "#666666",
-  //         ["interpolate", ["linear"], ["feature-state", "ensmean"],
-  //           ...yellowRedFill]
-  //       ]);
-  //     map.setPaintProperty("suburb-colors", "fill-outline-color",
-  //       ["case", ["==", ["feature-state", "ensmean"], null], "#666666",
-  //         ["interpolate", ["linear"], ["feature-state", "ensmean"],
-  //           ...yellowRedStroke]
-  //       ]);
-  //   } else {
-  //     // historical: diverging rainbow
-  //     console.log(actualScenario + ": switching to rainbow")
-  //     map.setPaintProperty("suburb-colors", "fill-color",
-  //       ["case", ["==", ["feature-state", "ensmean"], null], "#666666",
-  //         ["interpolate", ["linear"], ["feature-state", "ensmean"],
-  //           ...rainbowFill]
-  //       ]);
-  //     map.setPaintProperty("suburb-colors", "fill-outline-color",
-  //       ["case", ["==", ["feature-state", "ensmean"], null], "#666666",
-  //         ["interpolate", ["linear"], ["feature-state", "ensmean"],
-  //           ...rainbowStroke]
-  //       ]);
-  // }
-
-  // TODO - also set fill pattern if highlighted
-  // map.setPaintProperty("suburb-colors", "fill-patterm",
-  //     ["case", ["==", ["feature-state", "isFocus"], true],
-  //       "focusStripes",
-  //       // null?
-  //     ]);
-
-
 }
 ```
 
@@ -322,10 +251,12 @@ function zoomToSuburb(suburb) {
   console.log("Starting search for " + suburb)
   
   // get the suburb's feature
-  const targetSuburbFeature = map.querySourceFeatures("suburbs", {
-    sourceLayer: "suburbs-layer",
+  const targetSuburbFeature = map.querySourceFeatures("suburbs-source", {
+    sourceLayer: "suburbs",
     filter: ["==", "SAL_NAME21", suburb]
   });
+
+  console.log("Features found:", targetSuburbFeature)
 
   // TODO - this is where we should consider zooming out and searching again
   if (targetSuburbFeature.length != 1) {
@@ -351,8 +282,8 @@ function zoomToSuburb(suburb) {
   // highlight suburb?
   map.setFeatureState(
     {
-      source: "suburbs",
-      sourceLayer: "suburbs-layer",
+      source: "suburbs-source",
+      sourceLayer: "suburbs",
       id: suburb,
     },
     { inFocus: true }
@@ -382,70 +313,52 @@ function zoomToSuburb(suburb) {
 <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
 
 <header>
-## ${selectedSuburb.SAL_NAME21} {#modal-focused-suburb-title}
-<!-- #### ${suburbsInPostcode} -->
+## ${selectedSuburbName} {#modal-focused-suburb-title}
 </header>
 
 ::::: {#modal-focused-suburb-content}
 ```{ojs}
 //| label: info-panel
-// classes: focusPanel
+//| classes: focusPanel
+
 selectedSuburbData = stats
   .filter(d => d.SAL_NAME21 == selectedSuburb.SAL_NAME21)
 
 anyData = selectedSuburbData.length > 0;
 
-// figures = anyData ?
-//  {
-//     bf_area: bf_area,
-//     bf_area_pct: bf_area_pct
-
-//     figNow: focusedPostcodestats
-//       .filter(d => d.file_scenario == "historical"),
-//     fig2030Med: focusedPostcodestats
-//       .filter(d => d.file_scenario == "rcp45" && d.file_period == "2030"),
-//     fig2030MedDiff: focusedPostcodestats
-//       .filter(d => d.file_scenario == "rcp45diff" && d.file_period == "2030"),
-//     fig2050Med: focusedPostcodestats
-//       .filter(d => d.file_scenario == "rcp45" && d.file_period == "2050"),
-//     fig2050MedDiff: focusedPostcodestats
-//       .filter(d => d.file_scenario == "rcp45diff" && d.file_period == "2050"),
-//     fig2030High: focusedPostcodestats
-//       .filter(d => d.file_scenario == "rcp85" && d.file_period == "2030"),
-//     fig2030HighDiff: focusedPostcodestats
-//       .filter(d => d.file_scenario == "rcp85diff" && d.file_period == "2030"),
-//     fig2050High: focusedPostcodestats
-//       .filter(d => d.file_scenario == "rcp85" && d.file_period == "2050"),
-//     fig2050HighDiff: focusedPostcodestats
-//       .filter(d => d.file_scenario == "rcp85diff" && d.file_period == "2050")
-//  } :
-//  {
-//  };
-
 dataSwitch = {
-  console.log("Any data? ", anyData)
   if (anyData) {
-    // show .projection-content; hide .no-stats
+    // show .stats-content; hide .no-stats
     document.getElementById("no-stats").classList.remove("show");
-    document.getElementById("projection-content").classList.add("show");
+    document.getElementById("stats-content").classList.add("show");
   } else {
-    // hide .projection-content; show .no-stats
+    // hide .stats-content; show .no-stats
     document.getElementById("no-stats").classList.add("show");
-    document.getElementById("projection-content").classList.remove("show");
+    document.getElementById("stats-content").classList.remove("show");
   }
 }
 
 ```
 
+
 :::: {#no-stats}
 ❌ We don't have any data for this suburb, but try another one nearby.
 ::::
 
-:::: {#projection-content}
+:::: {#stats-content}
 
 ### ${selectedSuburbData.SAL_NAME21}
 
-${selectedSuburbData.bf_area_pct} percent of ${selectedSuburbData.SAL_NAME21} (${selectedSuburbData.bf_area} square km) is classified as bushfire-prone.
+```{ojs}
+//| label: selected-suburb-fields
+
+selectedSuburbName = selectedSuburbData[0].SAL_NAME21
+selectedSuburbPercent =
+  selectedSuburbData[0].bf_area_pct.toLocaleString(undefined, {style: "percent"})
+selectedSuburbArea = (selectedSuburbData[0].bf_area || 0).toFixed(1)
+
+md`${selectedSuburbPercent} of ${selectedSuburbName} (${selectedSuburbArea} sq. km) is classified as bushfire-prone.`
+```
 
 ::::
 

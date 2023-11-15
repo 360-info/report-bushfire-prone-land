@@ -66,18 +66,6 @@ header#title-block-header {
   white-space: normal;
 }
 
-.inputForm {
-  z-index: 1000;
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  background-color: #ffffffcc;
-  color: black;
-  padding: 8px;
-  width: calc(100vw - 16px);
-  margin-bottom: 0;
-}
-
 .areaInputForm {
   z-index: 1000;
   position: absolute;
@@ -191,11 +179,11 @@ header#title-block-header {
   color: firebrick;
 }
 
-/* projection detail: show either a warning or modal content */
-#no-projections, #projection-content {
+/* stats detail: show either a warning or modal content */
+#no-stats, #stats-content {
   display: none;
 }
 
-#no-projections.show, #projection-content.show {
+#no-stats.show, #stats-content.show {
   display: block;
 }
