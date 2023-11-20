@@ -1,7 +1,5 @@
 ---
-title: Future heat
-# subtitle: "Subtitle with [**EMPHASIS**]{style='color:#3595ac;'} here"
-description: Subtitle with emphasis here
+description: General description to go here
 format:
   360-embed-html: default
 css:
@@ -9,7 +7,7 @@ css:
 resources:
   # - news-heat-postcodes-featuremedia.png
   - style.json
-  - stripes.png
+  # - stripes.png
 ---
 
 ```{ojs}
@@ -26,6 +24,28 @@ micro.init({
 ```
 
 {{< include _popup-buttons.qmd >}}
+
+```{ojs}
+//| label: state-url-filter
+//| classes: custom-title-block
+
+// filter results to a state given by url fragment (default to nsw)
+allStates = ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT"]
+selectedState = {
+  const pageURL = new URL(window.location.href)
+  const stateChoice = pageURL.searchParams.get("state")?.toUpperCase()
+  // console.log("State choice:", stateChoice)
+  return allStates.includes(stateChoice) ? stateChoice : "NSW"
+}
+selectedStateCode = allStates.indexOf(selectedState) + 1
+console.log("Selected state is", selectedState, "- code is", selectedStateCode)
+
+
+// display a customised title and subtitle based on selected state
+map_title = md`# Bushfire-prone land: ${selectedState}`
+map_subtitle = md`Test subtitle here. This should reflect state rules.`
+
+```
 
 ```{ojs}
 //| label: libraries
@@ -84,15 +104,24 @@ viewof map = {
     });
 
     // this layer shades all suburbs
+    console.log("Setting tile filter to match code ", selectedStateCode)
     map.addLayer({
       id: "suburbs-colors",
       source: "suburbs-source",
       "source-layer": "suburbs",
-      type: "fill"//,
-      // paint: {
-      //   "fill-color": "#999999",
-      //   "fill-outline-color": "#666666"
-      // }
+      type: "fill",
+      // filter to state (but combine act and nsw together)
+      // filter: 
+        // ["case",
+        //   ["==", selectedStateCode.toString(), "1"],
+        //   // combine nsw and act
+        //   ["any",
+        //     ["==", "STE_CODE21", "1"],
+        //     ["==", "STE_CODE21", "8"]
+        //   ],
+        //   ["==", "STE_CODE21", selectedStateCode.toString()]
+        // ]
+      filter: ["==", "STE_CODE21", selectedStateCode.toString()]
     });
 
     // add pattern for focused postcodes
@@ -100,6 +129,10 @@ viewof map = {
     //   if (err) throw err;
     //   map.addImage("focusStripes", image);
     // });
+
+    // filter according to selected state
+    // console.log("Setting tile filter to match code ", selectedStateCode)
+    // map.setFilter("suburb-colors", ["==", "STE_CODE21", selectedStateCode])
 
     /* popup */
 
@@ -118,7 +151,8 @@ viewof map = {
       // display a warning if stats aren't available, or show them for
       // this layer if they are
       const suburbName = e.features[0].properties.SAL_NAME21
-      const bfPercent = e.features[0].state.bf_area_pct.toLocaleString(undefined, {style: "percent"})
+      const bfPercent = e.features[0].state.bf_area_pct
+        .toLocaleString(undefined, {style: "percent"})
 
       const noDataMessage =
         "We don't have data for " + suburbName +
