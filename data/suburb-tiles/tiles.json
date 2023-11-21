@@ -37,6 +37,7 @@
   ],
   "crs": "EPSG:3857",
   "tiles": [
+    "http://dev-map.360info-bushfire-prone-land.pages.dev/data/suburb-tiles/{z}/{x}/{y}.pbf",
     "http://localhost:5001/data/suburb-tiles/{z}/{x}/{y}.pbf"
   ]
 }
