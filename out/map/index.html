@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-99.9.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="General description to go here">
+
+<title>index</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="_extensions/360-info/360-embed/embed.css">
+<link rel="stylesheet" href="_extensions/360-info/360-embed/modal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@2.1.9/dist/maplibre-gl.css">
+</head>
+
+<body>
+
+
+
+
+
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="14" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 13;"><span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>micro <span class="op">=</span> <span class="pp">require</span>(<span class="st">"micromodal@0.4.10"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>micro<span class="op">.</span><span class="fu">init</span>({</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">awaitOpenAnimation</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">awaitCloseAnimation</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// hide the area controls when a modal is open</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">onShow</span><span class="op">:</span> () <span class="kw">=&gt;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"area-search-controls"</span>)<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">add</span>(<span class="st">"hide"</span>)<span class="op">,</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">onClose</span><span class="op">:</span> () <span class="kw">=&gt;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"area-search-controls"</span>)<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">remove</span>(<span class="st">"hide"</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="modalpanel">
+<div class="modalpanelitems">
+<!-- check https://icons.getbootstrap.com for icons! -->
+
+<a href="#" data-micromodal-trigger="modal-useremix" aria-label="Share dialog" role="button" tabindex="0">
+  <i class="bi bi-share-fill"></i>
+</a>
+
+<a href="#" data-micromodal-trigger="modal-about" aria-label="More information" role="button" tabindex="0">
+  <i class="bi bi-info-circle-fill"></i>
+</a>
+
+<a id="fullscreenButton" aria-label="Fullscreen" role="button" href="#" tabindex="0">
+  <span class="fsoff">
+    <i class="bi bi-arrows-fullscreen"></i>
+  </span>
+</a>
+
+<!-- full screen button script -->
+<script>
+  window.addEventListener("load", () => {
+    document.querySelector("#fullscreenButton").addEventListener("click", e => {
+      e.preventDefault();
+      console.log("FS button clicked!");
+
+      var fsBtn = document.querySelector("#fullscreenButton");
+
+      if (fsBtn.classList.contains("fsmode")) {
+        // fullscreen is on: disable it
+        document.exitFullscreen();
+        fsBtn.classList.remove("fsmode")
+      } else {
+        // fullscreen is off: enable it
+        var rootEl = document.documentElement;
+
+        var requestMethod =
+          rootEl.requestFullScreen ||
+          rootEl.webkitRequestFullScreen ||
+          rootEl.mozRequestFullScreen ||
+          rootEl.msRequestFullScreen;
+
+          if (requestMethod) {
+            requestMethod.call(rootEl);
+            fsBtn.classList.add("fsmode");
+          } else {
+            alert("Fullscreen mode isn't supported on this browser.")
+          }
+      }
+    });
+  })
+</script>
+</div>
+<!-- if there's room here, put credits on two lines:
+  * Editor names, 360info (hint: put &shy; in the middle of long names!)
+  * Data: ORG
+  (if there isn't room, put it in the ABOUT dialog) -->
+<p>James Goldie, 360info</p>
+<p>Data: NSW DPIE</p>
+</div>
+<!-- finally, here's the EDITOR SHARE button. it's a quick way to copy the
+     embed code for editors and will only appear if ?edshare=true is in the
+     url (that way it'll appear on the newswire but not subsequent shares) -->
+<div id="edshare">
+  <i id="edshare-icon" class="bi bi-clipboard2-plus-fill"></i>
+  <div>
+    <h4 id="edshare-title" class="anchored">GET THIS MAP</h4>
+    <p id="edshare-description">Click to copy this into your story</p>
+  </div>
+</div>
+<!-- editor share banner: enable if ?edshare is in the url -->
+<script>
+  window.addEventListener("load", () => {
+    pageURL = new URL(window.location.href);
+    edshare = pageURL.searchParams.get("edshare");
+    
+    edshareBtn = document.querySelector("#edshare");
+    if (edshare === null) {
+      edshareBtn.style.display = "none";
+    } else {
+    
+      edshareBtn.classList.add("ready");
+    
+      edshareBtn.addEventListener("click", () => {
+
+        // copy the embed code to the clipboard
+        navigator.clipboard.writeText(
+          `?var:newsembed.before?var:newsembed.url?var:newsembed.after`);
+
+        // update button styles and content
+        edshareBtn.classList.remove("ready");
+        edshareBtn.classList.add("clicked");
+
+        edshareIcon = document.querySelector("#edshare-icon");
+        edshareIcon.removeAttribute("class");
+        edshareIcon.classList.add("bi");
+        edshareIcon.classList.add("bi-check");
+
+        edshareTitle = document.querySelector("#edshare-title");
+        edshareTitle.innerText = "COPIED!";
+
+        edshareDescription = document.querySelector("#edshare-description");
+        edshareDescription.innerHTML =
+          `Paste this interactive with the <i class="bi bi-code-square"></i> Embed button in your story editor.</br></br>
+          
+          Please remember to <strong>attribute 360info and our data sources.</strong>`
+
+        // button exit animation
+        setTimeout(() => {  edshareBtn.classList.add("done"); }, 5000);
+        setTimeout(() => {  edshareBtn.style.display = "none"; }, 7000);
+      });
+    }
+  });
+</script>
+<div id="state-url-filter" class="cell custom-title-block">
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="33" data-source-offset="-69"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 32;"><span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>allStates <span class="op">=</span> [<span class="st">"NSW"</span><span class="op">,</span> <span class="st">"VIC"</span><span class="op">,</span> <span class="st">"QLD"</span><span class="op">,</span> <span class="st">"SA"</span><span class="op">,</span> <span class="st">"WA"</span><span class="op">,</span> <span class="st">"TAS"</span><span class="op">,</span> <span class="st">"NT"</span><span class="op">,</span> <span class="st">"ACT"</span>]</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>selectedState <span class="op">=</span> {</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> pageURL <span class="op">=</span> <span class="kw">new</span> <span class="fu">URL</span>(<span class="bu">window</span><span class="op">.</span><span class="at">location</span><span class="op">.</span><span class="at">href</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> stateChoice <span class="op">=</span> pageURL<span class="op">.</span><span class="at">searchParams</span><span class="op">.</span><span class="fu">get</span>(<span class="st">"state"</span>)<span class="op">?.</span><span class="fu">toUpperCase</span>()</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">// console.log("State choice:", stateChoice)</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> allStates<span class="op">.</span><span class="fu">includes</span>(stateChoice) <span class="op">?</span> stateChoice <span class="op">:</span> <span class="st">"NSW"</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>selectedStateCode <span class="op">=</span> allStates<span class="op">.</span><span class="fu">indexOf</span>(selectedState) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Selected state is"</span><span class="op">,</span> selectedState<span class="op">,</span> <span class="st">"- code is"</span><span class="op">,</span> selectedStateCode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="state-url-filter-1">
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="state-url-filter-2">
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="state-url-filter-3">
+<div id="ojs-cell-2-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="state-url-filter-4">
+<div id="ojs-cell-2-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="45" data-source-offset="-590"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 44;"><span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>map_title <span class="op">=</span> <span class="fu">md</span><span class="vs">`# Bushfire-prone land: </span><span class="sc">${</span>selectedState<span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>map_subtitle <span class="op">=</span> <span class="fu">md</span><span class="vs">`Test subtitle here. This should reflect state rules.`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="state-url-filter-5">
+<div id="ojs-cell-2-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="state-url-filter-6">
+<div id="ojs-cell-2-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div id="libraries" class="cell">
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="53" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 52;"><span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> require<span class="op">.</span><span class="fu">alias</span>({</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>  <span class="dt">maplibregl</span><span class="op">:</span> <span class="st">"maplibre-gl@2.1.9/dist/maplibre-gl.js"</span><span class="op">,</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>maplibregl <span class="op">=</span> <span class="fu">r</span>(<span class="st">"maplibregl"</span>)<span class="op">.</span><span class="fu">catch</span>(() <span class="kw">=&gt;</span> <span class="bu">window</span>[<span class="st">"maplibregl"</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="libraries-1">
+<div id="ojs-cell-3-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="libraries-2">
+<div id="ojs-cell-3-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="61" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 60;"><span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="co">/* this is a bit different to regular mapbox/maplibre instantiation</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="co">   it lets have the map react to other values in the document, like</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="co">   a button or a timer, without reinstantiating!</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="co">   (based on https://observablehq.com/@tmcw/using-mapbox-gl-js) */</span></span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>viewof map <span class="op">=</span> {</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> container <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div style="position: absolute; left: 0; top: 0; height: 100vh; width: 100%;" /&gt;`</span><span class="op">;</span></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Give the container dimensions.</span></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>  <span class="kw">yield</span> container<span class="op">;</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Create the \`map\` object with the mapboxgl.Map constructor, referencing</span></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>  <span class="co">// the container div</span></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> map <span class="op">=</span> <span class="kw">new</span> maplibregl<span class="op">.</span><span class="fu">Map</span>({</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    container<span class="op">,</span></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bounds</span><span class="op">:</span> [[<span class="dv">111</span><span class="op">,</span> <span class="op">-</span><span class="dv">46</span>]<span class="op">,</span> [<span class="dv">155</span><span class="op">,</span> <span class="op">-</span><span class="dv">9</span>]]<span class="op">,</span></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    <span class="dt">fitBoundsOptions</span><span class="op">:</span> {</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>      <span class="dt">padding</span><span class="op">:</span> {<span class="dt">top</span><span class="op">:</span> <span class="dv">130</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">70</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">5</span>}</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>    <span class="dt">maxZoom</span><span class="op">:</span> <span class="dv">14</span><span class="op">,</span></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>    <span class="dt">antialias</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>    <span class="dt">style</span><span class="op">:</span> <span class="st">"style.json"</span><span class="op">,</span></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>    <span class="dt">attributionControl</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>    <span class="co">// very loose to accomodate all of aus on portrait screens</span></span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>    <span class="dt">maxBounds</span><span class="op">:</span> [[<span class="dv">95</span><span class="op">,</span> <span class="op">-</span><span class="dv">70</span>]<span class="op">,</span> [<span class="dv">170</span><span class="op">,</span> <span class="dv">15</span>]]<span class="op">,</span></span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>  <span class="co">// on map load:</span></span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>  <span class="co">// - dispatch its value back to ojs</span></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>  <span class="co">// - add a prop to the layer that adds/removes a popup from the map</span></span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>  <span class="co">//   (we can't do this on initial layer def because the map isn't ready yet)</span></span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>  map<span class="op">.</span><span class="fu">on</span>(<span class="st">"load"</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>    container<span class="op">.</span><span class="at">value</span> <span class="op">=</span> map<span class="op">;</span></span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>    container<span class="op">.</span><span class="fu">dispatchEvent</span>(<span class="kw">new</span> <span class="bu">CustomEvent</span>(<span class="st">"input"</span>))<span class="op">;</span></span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Map loaded; adding tiles"</span>)</span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>    map<span class="op">.</span><span class="fu">addSource</span>(<span class="st">"suburbs-source"</span><span class="op">,</span> {</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>      <span class="st">"url"</span><span class="op">:</span> <span class="st">"/data/suburb-tiles/tiles.json"</span><span class="op">,</span></span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>      <span class="st">"type"</span><span class="op">:</span> <span class="st">"vector"</span><span class="op">,</span></span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>      <span class="st">"promoteId"</span><span class="op">:</span> <span class="st">"SAL_NAME21"</span></span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>    <span class="co">// this layer shades all suburbs</span></span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Setting tile filter to match code "</span><span class="op">,</span> selectedStateCode)</span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>    map<span class="op">.</span><span class="fu">addLayer</span>({</span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>      <span class="dt">id</span><span class="op">:</span> <span class="st">"suburbs-colors"</span><span class="op">,</span></span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>      <span class="dt">source</span><span class="op">:</span> <span class="st">"suburbs-source"</span><span class="op">,</span></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>      <span class="st">"source-layer"</span><span class="op">:</span> <span class="st">"suburbs"</span><span class="op">,</span></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>      <span class="dt">type</span><span class="op">:</span> <span class="st">"fill"</span><span class="op">,</span></span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>      <span class="co">// filter to state (but combine act and nsw together)</span></span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>      <span class="co">// filter: </span></span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ["case",</span></span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>        <span class="co">//   ["==", selectedStateCode.toString(), "1"],</span></span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>        <span class="co">//   // combine nsw and act</span></span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>        <span class="co">//   ["any",</span></span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>        <span class="co">//     ["==", "STE_CODE21", "1"],</span></span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>        <span class="co">//     ["==", "STE_CODE21", "8"]</span></span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a>        <span class="co">//   ],</span></span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>        <span class="co">//   ["==", "STE_CODE21", selectedStateCode.toString()]</span></span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ]</span></span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>      <span class="dt">filter</span><span class="op">:</span> [<span class="st">"=="</span><span class="op">,</span> <span class="st">"STE_CODE21"</span><span class="op">,</span> selectedStateCode<span class="op">.</span><span class="fu">toString</span>()]</span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>    <span class="co">// add pattern for focused postcodes</span></span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a>    <span class="co">// map.loadImage("stripes.png", function(err, image) {</span></span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a>    <span class="co">//   if (err) throw err;</span></span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a>    <span class="co">//   map.addImage("focusStripes", image);</span></span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a>    <span class="co">// });</span></span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a>    <span class="co">// filter according to selected state</span></span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a>    <span class="co">// console.log("Setting tile filter to match code ", selectedStateCode)</span></span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a>    <span class="co">// map.setFilter("suburb-colors", ["==", "STE_CODE21", selectedStateCode])</span></span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* popup */</span></span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> popup <span class="op">=</span> <span class="kw">new</span> maplibregl<span class="op">.</span><span class="fu">Popup</span>({</span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>      <span class="dt">closeButton</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a>      <span class="dt">closeOnClick</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>      <span class="dt">className</span><span class="op">:</span> <span class="st">"map-popup"</span></span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a>    map<span class="op">.</span><span class="fu">on</span>(<span class="st">"click"</span><span class="op">,</span> <span class="st">"suburbs-colors"</span><span class="op">,</span> <span class="kw">function</span>(e) {</span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a>      <span class="co">// change the cursor style as a ui indicator.</span></span>
+<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Mouse entering..."</span>)</span>
+<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a>      map<span class="op">.</span><span class="fu">getCanvas</span>()<span class="op">.</span><span class="at">style</span><span class="op">.</span><span class="at">cursor</span> <span class="op">=</span> <span class="st">"pointer"</span><span class="op">;</span></span>
+<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a>      <span class="co">// display a warning if stats aren't available, or show them for</span></span>
+<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a>      <span class="co">// this layer if they are</span></span>
+<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> suburbName <span class="op">=</span> e<span class="op">.</span><span class="at">features</span>[<span class="dv">0</span>]<span class="op">.</span><span class="at">properties</span><span class="op">.</span><span class="at">SAL_NAME21</span></span>
+<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> bfPercent <span class="op">=</span> e<span class="op">.</span><span class="at">features</span>[<span class="dv">0</span>]<span class="op">.</span><span class="at">state</span><span class="op">.</span><span class="at">bf_area_pct</span></span>
+<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">toLocaleString</span>(<span class="kw">undefined</span><span class="op">,</span> {<span class="dt">style</span><span class="op">:</span> <span class="st">"percent"</span>})</span>
+<span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> noDataMessage <span class="op">=</span></span>
+<span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a>        <span class="st">"We don't have data for "</span> <span class="op">+</span> suburbName <span class="op">+</span></span>
+<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a>        <span class="st">", but try another suburb nearby."</span><span class="op">;</span></span>
+<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a>      <span class="kw">var</span> dataMessage <span class="op">=</span></span>
+<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;h3&gt;"</span> <span class="op">+</span> e<span class="op">.</span><span class="at">features</span>[<span class="dv">0</span>]<span class="op">.</span><span class="at">properties</span><span class="op">.</span><span class="at">SAL_NAME21</span> <span class="op">+</span> <span class="st">"&lt;/h3&gt;"</span> <span class="op">+</span></span>
+<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;p&gt;&lt;strong&gt;"</span> <span class="op">+</span> bfPercent <span class="op">+</span> <span class="st">"&lt;/strong&gt; "</span> <span class="op">+</span></span>
+<span id="cb5-162"><a href="#cb5-162" aria-hidden="true" tabindex="-1"></a>        <span class="st">"is classified as bushfire-prone.&lt;/p&gt;"</span></span>
+<span id="cb5-163"><a href="#cb5-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-164"><a href="#cb5-164" aria-hidden="true" tabindex="-1"></a>      <span class="kw">var</span> description <span class="op">=</span> </span>
+<span id="cb5-165"><a href="#cb5-165" aria-hidden="true" tabindex="-1"></a>        <span class="co">// (e.features[0].state.ensmin === undefined</span></span>
+<span id="cb5-166"><a href="#cb5-166" aria-hidden="true" tabindex="-1"></a>        <span class="co">// | e.features[0].state.ensmax === undefined) ?</span></span>
+<span id="cb5-167"><a href="#cb5-167" aria-hidden="true" tabindex="-1"></a>        <span class="co">// noDataMessage : dataMessage;</span></span>
+<span id="cb5-168"><a href="#cb5-168" aria-hidden="true" tabindex="-1"></a>        dataMessage<span class="op">;</span></span>
+<span id="cb5-169"><a href="#cb5-169" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb5-170"><a href="#cb5-170" aria-hidden="true" tabindex="-1"></a>      <span class="co">// populate popup; locate based on mouse's back-projected position</span></span>
+<span id="cb5-171"><a href="#cb5-171" aria-hidden="true" tabindex="-1"></a>      popup<span class="op">.</span><span class="fu">setLngLat</span>(e<span class="op">.</span><span class="at">lngLat</span>)<span class="op">.</span><span class="fu">setHTML</span>(description)<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span>
+<span id="cb5-172"><a href="#cb5-172" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb5-173"><a href="#cb5-173" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb5-174"><a href="#cb5-174" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="map" class="cell-output cell-output-display">
+<div id="ojs-cell-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div id="area-search-controls" class="cell areaInputForm">
+<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="184" data-source-offset="-65"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 183;"><span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a>viewof areaSearch <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">search</span>(stats<span class="op">,</span> {</span>
+<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a>  <span class="dt">placeholder</span><span class="op">:</span> <span class="st">"Enter your suburb"</span><span class="op">,</span></span>
+<span id="cb6-186"><a href="#cb6-186" aria-hidden="true" tabindex="-1"></a>  <span class="co">// don't show the number of results</span></span>
+<span id="cb6-187"><a href="#cb6-187" aria-hidden="true" tabindex="-1"></a>  <span class="dt">format</span><span class="op">:</span> () <span class="kw">=&gt;</span> <span class="vs">``</span></span>
+<span id="cb6-188"><a href="#cb6-188" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb6-189"><a href="#cb6-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a><span class="co">// display a menu of results and a search button when we're down to 100 results</span></span>
+<span id="cb6-191"><a href="#cb6-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-192"><a href="#cb6-192" aria-hidden="true" tabindex="-1"></a>viewof selectedSuburb <span class="op">=</span></span>
+<span id="cb6-193"><a href="#cb6-193" aria-hidden="true" tabindex="-1"></a>  areaSearch<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> areaSearch<span class="op">.</span><span class="at">length</span> <span class="op">&lt;</span> <span class="dv">100</span> <span class="op">?</span></span>
+<span id="cb6-194"><a href="#cb6-194" aria-hidden="true" tabindex="-1"></a>    Inputs<span class="op">.</span><span class="fu">select</span>(areaSearch<span class="op">,</span> {</span>
+<span id="cb6-195"><a href="#cb6-195" aria-hidden="true" tabindex="-1"></a>      <span class="dt">format</span><span class="op">:</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">SAL_NAME21</span></span>
+<span id="cb6-196"><a href="#cb6-196" aria-hidden="true" tabindex="-1"></a>    }) <span class="op">:</span></span>
+<span id="cb6-197"><a href="#cb6-197" aria-hidden="true" tabindex="-1"></a>    <span class="fu">md</span><span class="vs">``</span></span>
+<span id="cb6-198"><a href="#cb6-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-199"><a href="#cb6-199" aria-hidden="true" tabindex="-1"></a>viewof goBtn <span class="op">=</span></span>
+<span id="cb6-200"><a href="#cb6-200" aria-hidden="true" tabindex="-1"></a>  areaSearch<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> areaSearch<span class="op">.</span><span class="at">length</span> <span class="op">&lt;</span> <span class="dv">100</span> <span class="op">?</span></span>
+<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a>    Inputs<span class="op">.</span><span class="fu">button</span>(<span class="vs">`🔍 Find`</span><span class="op">,</span> {</span>
+<span id="cb6-202"><a href="#cb6-202" aria-hidden="true" tabindex="-1"></a>      <span class="dt">reduce</span><span class="op">:</span> () <span class="kw">=&gt;</span> <span class="fu">zoomToSuburb</span>(selectedSuburb<span class="op">.</span><span class="at">SAL_NAME21</span>)</span>
+<span id="cb6-203"><a href="#cb6-203" aria-hidden="true" tabindex="-1"></a>    }) <span class="op">:</span></span>
+<span id="cb6-204"><a href="#cb6-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md</span><span class="vs">``</span></span>
+<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a><span class="co">// need a switch for when our tile search fails due to a postcode being too</span></span>
+<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a><span class="co">// small (bit of a workaround for not having the time to re-do the tiles!)</span></span>
+<span id="cb6-208"><a href="#cb6-208" aria-hidden="true" tabindex="-1"></a>mutable tileSearchFailed <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-210"><a href="#cb6-210" aria-hidden="true" tabindex="-1"></a>areaWarn <span class="op">=</span></span>
+<span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a>  tileSearchFailed <span class="op">?</span></span>
+<span id="cb6-212"><a href="#cb6-212" aria-hidden="true" tabindex="-1"></a>    <span class="fu">md</span><span class="vs">`🔍 This suburb's either very small or not in view — zoom in or out a bit and search again.`</span> <span class="op">:</span></span>
+<span id="cb6-213"><a href="#cb6-213" aria-hidden="true" tabindex="-1"></a>    areaSearch<span class="op">.</span><span class="at">length</span> <span class="op">==</span> <span class="dv">0</span> <span class="op">?</span></span>
+<span id="cb6-214"><a href="#cb6-214" aria-hidden="true" tabindex="-1"></a>      <span class="fu">md</span><span class="vs">`❌ No areas matched this search`</span> <span class="op">:</span></span>
+<span id="cb6-215"><a href="#cb6-215" aria-hidden="true" tabindex="-1"></a>      <span class="fu">md</span><span class="vs">``</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="area-search-controls-1">
+<div id="ojs-cell-5-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="area-search-controls-2">
+<div id="ojs-cell-5-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="area-search-controls-3">
+<div id="ojs-cell-5-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="area-search-controls-4">
+<div id="ojs-cell-5-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="area-search-controls-5">
+<div id="ojs-cell-5-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="220" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 219;"><span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"/data/bf-prone-processed.csv"</span>)<span class="op">.</span><span class="fu">csv</span>({ <span class="dt">typed</span><span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="get-data" class="cell-output cell-output-display">
+<div id="ojs-cell-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div id="update-map" class="cell">
+<div class="sourceCode cell-code hidden" id="cb8" data-startfrom="227" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 226;"><span id="cb8-227"><a href="#cb8-227" aria-hidden="true" tabindex="-1"></a>yellowRedFill <span class="op">=</span> [</span>
+<span id="cb8-228"><a href="#cb8-228" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.0</span><span class="op">,</span> <span class="st">"#ffffd4"</span><span class="op">,</span></span>
+<span id="cb8-229"><a href="#cb8-229" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.2</span><span class="op">,</span> <span class="st">"#fed98e"</span><span class="op">,</span></span>
+<span id="cb8-230"><a href="#cb8-230" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.4</span><span class="op">,</span> <span class="st">"#fe9929"</span><span class="op">,</span></span>
+<span id="cb8-231"><a href="#cb8-231" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.6</span><span class="op">,</span> <span class="st">"#d95f0e"</span><span class="op">,</span></span>
+<span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.8</span><span class="op">,</span> <span class="st">"#993404"</span>]</span>
+<span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a>yellowRedStroke <span class="op">=</span> [</span>
+<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.0</span><span class="op">,</span> <span class="st">"#ffff76"</span><span class="op">,</span></span>
+<span id="cb8-236"><a href="#cb8-236" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.2</span><span class="op">,</span> <span class="st">"#fdbe3f"</span><span class="op">,</span></span>
+<span id="cb8-237"><a href="#cb8-237" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.4</span><span class="op">,</span> <span class="st">"#ea7c01"</span><span class="op">,</span></span>
+<span id="cb8-238"><a href="#cb8-238" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.6</span><span class="op">,</span> <span class="st">"#ad4c0b"</span><span class="op">,</span></span>
+<span id="cb8-239"><a href="#cb8-239" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.8</span><span class="op">,</span> <span class="st">"#7a2903"</span>]</span>
+<span id="cb8-240"><a href="#cb8-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-241"><a href="#cb8-241" aria-hidden="true" tabindex="-1"></a><span class="co">// when the filtered data changes, rejoin it to the map tiles and update the</span></span>
+<span id="cb8-242"><a href="#cb8-242" aria-hidden="true" tabindex="-1"></a><span class="co">// colour scheme</span></span>
+<span id="cb8-243"><a href="#cb8-243" aria-hidden="true" tabindex="-1"></a>updateMapData <span class="op">=</span> {</span>
+<span id="cb8-244"><a href="#cb8-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-245"><a href="#cb8-245" aria-hidden="true" tabindex="-1"></a>  stats<span class="op">.</span><span class="fu">forEach</span>(row <span class="kw">=&gt;</span> {</span>
+<span id="cb8-246"><a href="#cb8-246" aria-hidden="true" tabindex="-1"></a>    map<span class="op">.</span><span class="fu">setFeatureState</span>(</span>
+<span id="cb8-247"><a href="#cb8-247" aria-hidden="true" tabindex="-1"></a>      {</span>
+<span id="cb8-248"><a href="#cb8-248" aria-hidden="true" tabindex="-1"></a>        <span class="dt">source</span><span class="op">:</span> <span class="st">"suburbs-source"</span><span class="op">,</span></span>
+<span id="cb8-249"><a href="#cb8-249" aria-hidden="true" tabindex="-1"></a>        <span class="dt">sourceLayer</span><span class="op">:</span> <span class="st">"suburbs"</span><span class="op">,</span></span>
+<span id="cb8-250"><a href="#cb8-250" aria-hidden="true" tabindex="-1"></a>        <span class="dt">id</span><span class="op">:</span> row<span class="op">.</span><span class="at">SAL_NAME21</span><span class="op">,</span></span>
+<span id="cb8-251"><a href="#cb8-251" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb8-252"><a href="#cb8-252" aria-hidden="true" tabindex="-1"></a>      {</span>
+<span id="cb8-253"><a href="#cb8-253" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bf_area</span><span class="op">:</span>row<span class="op">.</span><span class="at">bf_area</span><span class="op">,</span></span>
+<span id="cb8-254"><a href="#cb8-254" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bf_area_pct</span><span class="op">:</span> row<span class="op">.</span><span class="at">bf_area_pct</span></span>
+<span id="cb8-255"><a href="#cb8-255" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb8-256"><a href="#cb8-256" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
+<span id="cb8-257"><a href="#cb8-257" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb8-258"><a href="#cb8-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-259"><a href="#cb8-259" aria-hidden="true" tabindex="-1"></a>  map<span class="op">.</span><span class="fu">setPaintProperty</span>(<span class="st">"suburbs-colors"</span><span class="op">,</span> <span class="st">"fill-color"</span><span class="op">,</span></span>
+<span id="cb8-260"><a href="#cb8-260" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"case"</span><span class="op">,</span> [<span class="st">"=="</span><span class="op">,</span></span>
+<span id="cb8-261"><a href="#cb8-261" aria-hidden="true" tabindex="-1"></a>      [<span class="st">"feature-state"</span><span class="op">,</span> <span class="st">"bf_area_pct"</span>]<span class="op">,</span> <span class="kw">null</span>]<span class="op">,</span></span>
+<span id="cb8-262"><a href="#cb8-262" aria-hidden="true" tabindex="-1"></a>      <span class="st">"#666666"</span><span class="op">,</span></span>
+<span id="cb8-263"><a href="#cb8-263" aria-hidden="true" tabindex="-1"></a>      [<span class="st">"interpolate"</span><span class="op">,</span> [<span class="st">"linear"</span>]<span class="op">,</span> [<span class="st">"feature-state"</span><span class="op">,</span> <span class="st">"bf_area_pct"</span>]<span class="op">,</span></span>
+<span id="cb8-264"><a href="#cb8-264" aria-hidden="true" tabindex="-1"></a>        <span class="op">...</span>yellowRedFill]</span>
+<span id="cb8-265"><a href="#cb8-265" aria-hidden="true" tabindex="-1"></a>    ])</span>
+<span id="cb8-266"><a href="#cb8-266" aria-hidden="true" tabindex="-1"></a>  map<span class="op">.</span><span class="fu">setPaintProperty</span>(<span class="st">"suburbs-colors"</span><span class="op">,</span> <span class="st">"fill-outline-color"</span><span class="op">,</span></span>
+<span id="cb8-267"><a href="#cb8-267" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"case"</span><span class="op">,</span> [<span class="st">"=="</span><span class="op">,</span></span>
+<span id="cb8-268"><a href="#cb8-268" aria-hidden="true" tabindex="-1"></a>      [<span class="st">"feature-state"</span><span class="op">,</span> <span class="st">"bf_area_pct"</span>]<span class="op">,</span> <span class="kw">null</span>]<span class="op">,</span></span>
+<span id="cb8-269"><a href="#cb8-269" aria-hidden="true" tabindex="-1"></a>      <span class="st">"#666666"</span><span class="op">,</span></span>
+<span id="cb8-270"><a href="#cb8-270" aria-hidden="true" tabindex="-1"></a>      [<span class="st">"interpolate"</span><span class="op">,</span> [<span class="st">"linear"</span>]<span class="op">,</span> [<span class="st">"feature-state"</span><span class="op">,</span> <span class="st">"bf_area_pct"</span>]<span class="op">,</span></span>
+<span id="cb8-271"><a href="#cb8-271" aria-hidden="true" tabindex="-1"></a>        <span class="op">...</span>yellowRedStroke]</span>
+<span id="cb8-272"><a href="#cb8-272" aria-hidden="true" tabindex="-1"></a>    ])<span class="op">;</span></span>
+<span id="cb8-273"><a href="#cb8-273" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="update-map-1">
+<div id="ojs-cell-7-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="update-map-2">
+<div id="ojs-cell-7-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="update-map-3">
+<div id="ojs-cell-7-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb9" data-startfrom="277" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 276;"><span id="cb9-277"><a href="#cb9-277" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">zoomToSuburb</span>(suburb) {</span>
+<span id="cb9-278"><a href="#cb9-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-279"><a href="#cb9-279" aria-hidden="true" tabindex="-1"></a>  <span class="co">// </span><span class="al">TODO</span><span class="co"> - stop highlighting previously selected suburb</span></span>
+<span id="cb9-280"><a href="#cb9-280" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Starting search for "</span> <span class="op">+</span> suburb)</span>
+<span id="cb9-281"><a href="#cb9-281" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-282"><a href="#cb9-282" aria-hidden="true" tabindex="-1"></a>  <span class="co">// get the suburb's feature</span></span>
+<span id="cb9-283"><a href="#cb9-283" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> targetSuburbFeature <span class="op">=</span> map<span class="op">.</span><span class="fu">querySourceFeatures</span>(<span class="st">"suburbs-source"</span><span class="op">,</span> {</span>
+<span id="cb9-284"><a href="#cb9-284" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sourceLayer</span><span class="op">:</span> <span class="st">"suburbs"</span><span class="op">,</span></span>
+<span id="cb9-285"><a href="#cb9-285" aria-hidden="true" tabindex="-1"></a>    <span class="dt">filter</span><span class="op">:</span> [<span class="st">"=="</span><span class="op">,</span> <span class="st">"SAL_NAME21"</span><span class="op">,</span> suburb]</span>
+<span id="cb9-286"><a href="#cb9-286" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb9-287"><a href="#cb9-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-288"><a href="#cb9-288" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"Features found:"</span><span class="op">,</span> targetSuburbFeature)</span>
+<span id="cb9-289"><a href="#cb9-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-290"><a href="#cb9-290" aria-hidden="true" tabindex="-1"></a>  <span class="co">// </span><span class="al">TODO</span><span class="co"> - this is where we should consider zooming out and searching again</span></span>
+<span id="cb9-291"><a href="#cb9-291" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (targetSuburbFeature<span class="op">.</span><span class="at">length</span> <span class="op">!=</span> <span class="dv">1</span>) {</span>
+<span id="cb9-292"><a href="#cb9-292" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">"Can only zoom to 1 suburb at a time, not "</span><span class="op">,</span></span>
+<span id="cb9-293"><a href="#cb9-293" aria-hidden="true" tabindex="-1"></a>      targetSuburbFeature<span class="op">.</span><span class="at">length</span>)<span class="op">;</span></span>
+<span id="cb9-294"><a href="#cb9-294" aria-hidden="true" tabindex="-1"></a>    mutable tileSearchFailed <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb9-295"><a href="#cb9-295" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-296"><a href="#cb9-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-297"><a href="#cb9-297" aria-hidden="true" tabindex="-1"></a>  <span class="co">// get the feature's geometry</span></span>
+<span id="cb9-298"><a href="#cb9-298" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> geom <span class="op">=</span> targetSuburbFeature[<span class="dv">0</span>]<span class="op">.</span><span class="at">geometry</span><span class="op">.</span><span class="at">coordinates</span>[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb9-299"><a href="#cb9-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-300"><a href="#cb9-300" aria-hidden="true" tabindex="-1"></a>  <span class="co">// reduce the geometry to bounds</span></span>
+<span id="cb9-301"><a href="#cb9-301" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> suburbBounds <span class="op">=</span> geom<span class="op">.</span><span class="fu">reduce</span>(</span>
+<span id="cb9-302"><a href="#cb9-302" aria-hidden="true" tabindex="-1"></a>    (accum<span class="op">,</span> current) <span class="kw">=&gt;</span> accum<span class="op">.</span><span class="fu">extend</span>(current)<span class="op">,</span>        </span>
+<span id="cb9-303"><a href="#cb9-303" aria-hidden="true" tabindex="-1"></a>    <span class="kw">new</span> maplibregl<span class="op">.</span><span class="fu">LngLatBounds</span>(geom[<span class="dv">0</span>]<span class="op">,</span> geom[<span class="dv">0</span>]))<span class="op">;</span></span>
+<span id="cb9-304"><a href="#cb9-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-305"><a href="#cb9-305" aria-hidden="true" tabindex="-1"></a>  <span class="co">// zoom to suburb</span></span>
+<span id="cb9-306"><a href="#cb9-306" aria-hidden="true" tabindex="-1"></a>  map<span class="op">.</span><span class="fu">fitBounds</span>(suburbBounds<span class="op">,</span> {</span>
+<span id="cb9-307"><a href="#cb9-307" aria-hidden="true" tabindex="-1"></a>    <span class="dt">padding</span><span class="op">:</span> {<span class="dt">top</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">10</span>}<span class="op">,</span></span>
+<span id="cb9-308"><a href="#cb9-308" aria-hidden="true" tabindex="-1"></a>    <span class="dt">maxZoom</span><span class="op">:</span> <span class="dv">12</span></span>
+<span id="cb9-309"><a href="#cb9-309" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb9-310"><a href="#cb9-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-311"><a href="#cb9-311" aria-hidden="true" tabindex="-1"></a>  <span class="co">// highlight suburb?</span></span>
+<span id="cb9-312"><a href="#cb9-312" aria-hidden="true" tabindex="-1"></a>  map<span class="op">.</span><span class="fu">setFeatureState</span>(</span>
+<span id="cb9-313"><a href="#cb9-313" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb9-314"><a href="#cb9-314" aria-hidden="true" tabindex="-1"></a>      <span class="dt">source</span><span class="op">:</span> <span class="st">"suburbs-source"</span><span class="op">,</span></span>
+<span id="cb9-315"><a href="#cb9-315" aria-hidden="true" tabindex="-1"></a>      <span class="dt">sourceLayer</span><span class="op">:</span> <span class="st">"suburbs"</span><span class="op">,</span></span>
+<span id="cb9-316"><a href="#cb9-316" aria-hidden="true" tabindex="-1"></a>      <span class="dt">id</span><span class="op">:</span> suburb<span class="op">,</span></span>
+<span id="cb9-317"><a href="#cb9-317" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb9-318"><a href="#cb9-318" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">inFocus</span><span class="op">:</span> <span class="kw">true</span> }</span>
+<span id="cb9-319"><a href="#cb9-319" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb9-320"><a href="#cb9-320" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-321"><a href="#cb9-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-322"><a href="#cb9-322" aria-hidden="true" tabindex="-1"></a>  <span class="co">// display info panel</span></span>
+<span id="cb9-323"><a href="#cb9-323" aria-hidden="true" tabindex="-1"></a>  <span class="co">// (hide the area controls when a modal is open)</span></span>
+<span id="cb9-324"><a href="#cb9-324" aria-hidden="true" tabindex="-1"></a>  <span class="pp">setTimeout</span>(</span>
+<span id="cb9-325"><a href="#cb9-325" aria-hidden="true" tabindex="-1"></a>    micro<span class="op">.</span><span class="fu">show</span>(<span class="st">"modal-focused-suburb"</span><span class="op">,</span> {</span>
+<span id="cb9-326"><a href="#cb9-326" aria-hidden="true" tabindex="-1"></a>      <span class="dt">onShow</span><span class="op">:</span> () <span class="kw">=&gt;</span> </span>
+<span id="cb9-327"><a href="#cb9-327" aria-hidden="true" tabindex="-1"></a>        <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"area-search-controls"</span>)<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">add</span>(<span class="st">"hide"</span>)<span class="op">,</span></span>
+<span id="cb9-328"><a href="#cb9-328" aria-hidden="true" tabindex="-1"></a>      <span class="dt">onClose</span><span class="op">:</span> () <span class="kw">=&gt;</span> </span>
+<span id="cb9-329"><a href="#cb9-329" aria-hidden="true" tabindex="-1"></a>        <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"area-search-controls"</span>)<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">remove</span>(<span class="st">"hide"</span>)</span>
+<span id="cb9-330"><a href="#cb9-330" aria-hidden="true" tabindex="-1"></a>      })<span class="op">,</span></span>
+<span id="cb9-331"><a href="#cb9-331" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1000</span>)<span class="op">;</span></span>
+<span id="cb9-332"><a href="#cb9-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-333"><a href="#cb9-333" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="zoom-to-suburb-fn" class="cell-output cell-output-display">
+<div id="ojs-cell-8" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<!-- the panel with further suburb-specific information pops up as a modal -->
+<div id="modal-focused-suburb" class="modal micromodal-slide" aria-hidden="true">
+<div class="modal__overlay" tabindex="-1" data-micromodal-close="true">
+<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-focused-suburb-title">
+<button class="modal__close" aria-label="Close modal" data-micromodal-close="">
+</button>
+<header>
+<h2 id="modal-focused-suburb-title" class="anchored"><span><span id="ojs-element-id-1"></span></span></h2>
+</header>
+<div id="modal-focused-suburb-content">
+<div id="info-panel" class="cell focusPanel">
+<div class="sourceCode cell-code hidden" id="cb10" data-startfrom="354" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 353;"><span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a>selectedSuburbData <span class="op">=</span> stats</span>
+<span id="cb10-355"><a href="#cb10-355" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">SAL_NAME21</span> <span class="op">==</span> selectedSuburb<span class="op">.</span><span class="at">SAL_NAME21</span>)</span>
+<span id="cb10-356"><a href="#cb10-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-357"><a href="#cb10-357" aria-hidden="true" tabindex="-1"></a>anyData <span class="op">=</span> selectedSuburbData<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-358"><a href="#cb10-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-359"><a href="#cb10-359" aria-hidden="true" tabindex="-1"></a>dataSwitch <span class="op">=</span> {</span>
+<span id="cb10-360"><a href="#cb10-360" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (anyData) {</span>
+<span id="cb10-361"><a href="#cb10-361" aria-hidden="true" tabindex="-1"></a>    <span class="co">// show .stats-content; hide .no-stats</span></span>
+<span id="cb10-362"><a href="#cb10-362" aria-hidden="true" tabindex="-1"></a>    <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"no-stats"</span>)<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">remove</span>(<span class="st">"show"</span>)<span class="op">;</span></span>
+<span id="cb10-363"><a href="#cb10-363" aria-hidden="true" tabindex="-1"></a>    <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"stats-content"</span>)<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">add</span>(<span class="st">"show"</span>)<span class="op">;</span></span>
+<span id="cb10-364"><a href="#cb10-364" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb10-365"><a href="#cb10-365" aria-hidden="true" tabindex="-1"></a>    <span class="co">// hide .stats-content; show .no-stats</span></span>
+<span id="cb10-366"><a href="#cb10-366" aria-hidden="true" tabindex="-1"></a>    <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"no-stats"</span>)<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">add</span>(<span class="st">"show"</span>)<span class="op">;</span></span>
+<span id="cb10-367"><a href="#cb10-367" aria-hidden="true" tabindex="-1"></a>    <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">"stats-content"</span>)<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">remove</span>(<span class="st">"show"</span>)<span class="op">;</span></span>
+<span id="cb10-368"><a href="#cb10-368" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-369"><a href="#cb10-369" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="info-panel-1">
+<div id="ojs-cell-9-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="info-panel-2">
+<div id="ojs-cell-9-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="info-panel-3">
+<div id="ojs-cell-9-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div id="no-stats">
+<p>❌ We don’t have any data for this suburb, but try another one nearby.</p>
+</div>
+<div id="stats-content">
+<h3 id="selectedsuburbdata.sal_name21" class="anchored"><span><span id="ojs-element-id-2"></span></span></h3>
+<div id="selected-suburb-fields" class="cell">
+<div class="sourceCode cell-code hidden" id="cb11" data-startfrom="385" data-source-offset="-1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 384;"><span id="cb11-385"><a href="#cb11-385" aria-hidden="true" tabindex="-1"></a>selectedSuburbName <span class="op">=</span> selectedSuburbData[<span class="dv">0</span>]<span class="op">.</span><span class="at">SAL_NAME21</span></span>
+<span id="cb11-386"><a href="#cb11-386" aria-hidden="true" tabindex="-1"></a>selectedSuburbPercent <span class="op">=</span></span>
+<span id="cb11-387"><a href="#cb11-387" aria-hidden="true" tabindex="-1"></a>  selectedSuburbData[<span class="dv">0</span>]<span class="op">.</span><span class="at">bf_area_pct</span><span class="op">.</span><span class="fu">toLocaleString</span>(<span class="kw">undefined</span><span class="op">,</span> {<span class="dt">style</span><span class="op">:</span> <span class="st">"percent"</span>})</span>
+<span id="cb11-388"><a href="#cb11-388" aria-hidden="true" tabindex="-1"></a>selectedSuburbArea <span class="op">=</span> (selectedSuburbData[<span class="dv">0</span>]<span class="op">.</span><span class="at">bf_area</span> <span class="op">||</span> <span class="dv">0</span>)<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)</span>
+<span id="cb11-389"><a href="#cb11-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-390"><a href="#cb11-390" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`</span><span class="sc">${</span>selectedSuburbPercent<span class="sc">}</span><span class="vs"> of </span><span class="sc">${</span>selectedSuburbName<span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span>selectedSuburbArea<span class="sc">}</span><span class="vs"> sq. km) is classified as bushfire-prone.`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="selected-suburb-fields-1">
+<div id="ojs-cell-10-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="selected-suburb-fields-2">
+<div id="ojs-cell-10-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="selected-suburb-fields-3">
+<div id="ojs-cell-10-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="selected-suburb-fields-4">
+<div id="ojs-cell-10-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- initialise miromodal.js -->
+<div id="modal-useremix" class="modal micromodal-slide" aria-hidden="true">
+<div class="modal__overlay" tabindex="-1" data-micromodal-close="true">
+<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-useremix-title">
+<button class="modal__close" aria-label="Close modal" data-micromodal-close="">
+</button>
+<div id="modal-useremix-content">
+<h2 id="use-remix" class="anchored">Use + Remix</h2>
+<p>These charts, as well as the analyses that underpin them, are available under a <a href="https://creativecommons.org/licenses/by/4.0"><strong>Creative Commons Attribution 4.0 licence</strong></a>.</p>
+<p>Please acknowledge <a href="https://360info.org">360info</a> and our data sources when you use these charts and data:</p>
+<ul>
+<li><a href="https://climatedata-beta.environment.nsw.gov.au/">NARCliM1.5: NSW DPIE</a></li>
+</ul>
+<h4 id="embed-this-chart-in-your-article" class="anchored">Embed this chart in your article</h4>
+<p>Copy and paste the following code:</p>
+<div class="embedcode">
+<pre><code>?var:newsembed.before?var:newsembed.url?var:newsembed.after</code></pre>
+</div>
+<p>This content is subject to <a href="https://newshub.360info.org/page/terms">360info’s Terms of Use</a>.</p>
+<h4 id="get-the-data-and-code" class="anchored">Get the data and code</h4>
+<p>Visit the <a href="https://github.com/360-info/report-template/tree/main/data">GitHub repository</a> to:</p>
+<ul>
+<li><a href="https://github.com/360-info/report-template/tree/main/data"><strong>Download the data</strong></a></li>
+<li><a href="https://github.com/360-info/report-template"><strong>Recreate or remix the chart</strong></a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- notes dialog -->
+<div id="modal-about" class="modal micromodal-slide" aria-hidden="true">
+<div class="modal__overlay" tabindex="-1" data-micromodal-close="true">
+<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-about-title">
+<button class="modal__close" aria-label="Close modal" data-micromodal-close="">
+</button>
+<header>
+<h2 id="modal-about-title" class="anchored">About</h2>
+</header>
+<div id="modal-about-content">
+<p>This map shows how a set of climate models estimate 35°C+ days will change across Australia in the coming decades. You can narrow in on a particular postcode.</p>
+<p>The data comes from <a href="https://doi.org/10.1029/2020EF001833">NARCliM1.5</a>, an experiment undertaking by the <a href="https://www.dpie.nsw.gov.au">NSW Department of Planning and Environment</a> and the <a href="https://ccrc.unsw.edu.au">Climate Change Research Centre</a>.</p>
+<p>Because more than one climate models is used, we tell you the range of estimates among them.</p>
+<p>NARCLiM1.5 is used by scientists to compare against an earlier version of NARCliM, which had slightly less warming. <strong>These estimates should therefore be considered an upper bound.</strong></p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="ojs-auto-generated hidden">
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6WyAgeyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiaW5saW5lIjoidHJ1ZSIsInNvdXJjZSI6Imh0bC5odG1sYDxzcGFuPiR7c2VsZWN0ZWRTdWJ1cmJOYW1lfTwvc3Bhbj5gIiwgImNlbGxOYW1lIjoib2pzLWVsZW1lbnQtaWQtMSJ9LCAgeyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiaW5saW5lIjoidHJ1ZSIsInNvdXJjZSI6Imh0bC5odG1sYDxzcGFuPiR7c2VsZWN0ZWRTdWJ1cmJEYXRhLlNBTF9OQU1FMjF9PC9zcGFuPmAiLCAiY2VsbE5hbWUiOiJvanMtZWxlbWVudC1pZC0yIn1dfQ==
+</script>
+</div>
+
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Im1pY3JvID0gcmVxdWlyZShcIm1pY3JvbW9kYWxAMC40LjEwXCIpXG5taWNyby5pbml0KHtcbiAgYXdhaXRPcGVuQW5pbWF0aW9uOiB0cnVlLFxuICBhd2FpdENsb3NlQW5pbWF0aW9uOiB0cnVlLFxuICAvLyBoaWRlIHRoZSBhcmVhIGNvbnRyb2xzIHdoZW4gYSBtb2RhbCBpcyBvcGVuXG4gIG9uU2hvdzogKCkgPT5cbiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImFyZWEtc2VhcmNoLWNvbnRyb2xzXCIpLmNsYXNzTGlzdC5hZGQoXCJoaWRlXCIpLFxuICBvbkNsb3NlOiAoKSA9PlxuICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiYXJlYS1zZWFyY2gtY29udHJvbHNcIikuY2xhc3NMaXN0LnJlbW92ZShcImhpZGVcIilcbn0pO1xuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG4vLyBmaWx0ZXIgcmVzdWx0cyB0byBhIHN0YXRlIGdpdmVuIGJ5IHVybCBmcmFnbWVudCAoZGVmYXVsdCB0byBuc3cpXG5hbGxTdGF0ZXMgPSBbXCJOU1dcIiwgXCJWSUNcIiwgXCJRTERcIiwgXCJTQVwiLCBcIldBXCIsIFwiVEFTXCIsIFwiTlRcIiwgXCJBQ1RcIl1cbnNlbGVjdGVkU3RhdGUgPSB7XG4gIGNvbnN0IHBhZ2VVUkwgPSBuZXcgVVJMKHdpbmRvdy5sb2NhdGlvbi5ocmVmKVxuICBjb25zdCBzdGF0ZUNob2ljZSA9IHBhZ2VVUkwuc2VhcmNoUGFyYW1zLmdldChcInN0YXRlXCIpPy50b1VwcGVyQ2FzZSgpXG4gIC8vIGNvbnNvbGUubG9nKFwiU3RhdGUgY2hvaWNlOlwiLCBzdGF0ZUNob2ljZSlcbiAgcmV0dXJuIGFsbFN0YXRlcy5pbmNsdWRlcyhzdGF0ZUNob2ljZSkgPyBzdGF0ZUNob2ljZSA6IFwiTlNXXCJcbn1cbnNlbGVjdGVkU3RhdGVDb2RlID0gYWxsU3RhdGVzLmluZGV4T2Yoc2VsZWN0ZWRTdGF0ZSkgKyAxXG5jb25zb2xlLmxvZyhcIlNlbGVjdGVkIHN0YXRlIGlzXCIsIHNlbGVjdGVkU3RhdGUsIFwiLSBjb2RlIGlzXCIsIHNlbGVjdGVkU3RhdGVDb2RlKVxuXG5cbi8vIGRpc3BsYXkgYSBjdXN0b21pc2VkIHRpdGxlIGFuZCBzdWJ0aXRsZSBiYXNlZCBvbiBzZWxlY3RlZCBzdGF0ZVxubWFwX3RpdGxlID0gbWRgIyBCdXNoZmlyZS1wcm9uZSBsYW5kOiAke3NlbGVjdGVkU3RhdGV9YFxubWFwX3N1YnRpdGxlID0gbWRgVGVzdCBzdWJ0aXRsZSBoZXJlLiBUaGlzIHNob3VsZCByZWZsZWN0IHN0YXRlIHJ1bGVzLmBcblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG5yID0gcmVxdWlyZS5hbGlhcyh7XG4gIG1hcGxpYnJlZ2w6IFwibWFwbGlicmUtZ2xAMi4xLjkvZGlzdC9tYXBsaWJyZS1nbC5qc1wiLFxufSk7XG5cbm1hcGxpYnJlZ2wgPSByKFwibWFwbGlicmVnbFwiKS5jYXRjaCgoKSA9PiB3aW5kb3dbXCJtYXBsaWJyZWdsXCJdKTtcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxuLyogdGhpcyBpcyBhIGJpdCBkaWZmZXJlbnQgdG8gcmVndWxhciBtYXBib3gvbWFwbGlicmUgaW5zdGFudGlhdGlvblxuICAgaXQgbGV0cyBoYXZlIHRoZSBtYXAgcmVhY3QgdG8gb3RoZXIgdmFsdWVzIGluIHRoZSBkb2N1bWVudCwgbGlrZVxuICAgYSBidXR0b24gb3IgYSB0aW1lciwgd2l0aG91dCByZWluc3RhbnRpYXRpbmchXG4gICAoYmFzZWQgb24gaHR0cHM6Ly9vYnNlcnZhYmxlaHEuY29tL0B0bWN3L3VzaW5nLW1hcGJveC1nbC1qcykgKi9cbiAgIFxudmlld29mIG1hcCA9IHtcbiAgbGV0IGNvbnRhaW5lciA9IGh0bWxgPGRpdiBzdHlsZT1cInBvc2l0aW9uOiBhYnNvbHV0ZTsgbGVmdDogMDsgdG9wOiAwOyBoZWlnaHQ6IDEwMHZoOyB3aWR0aDogMTAwJTtcIiAvPmA7XG5cbiAgLy8gR2l2ZSB0aGUgY29udGFpbmVyIGRpbWVuc2lvbnMuXG4gIHlpZWxkIGNvbnRhaW5lcjtcblxuICAvLyBDcmVhdGUgdGhlIFxcYG1hcFxcYCBvYmplY3Qgd2l0aCB0aGUgbWFwYm94Z2wuTWFwIGNvbnN0cnVjdG9yLCByZWZlcmVuY2luZ1xuICAvLyB0aGUgY29udGFpbmVyIGRpdlxuICBsZXQgbWFwID0gbmV3IG1hcGxpYnJlZ2wuTWFwKHtcbiAgICBjb250YWluZXIsXG4gICAgYm91bmRzOiBbWzExMSwgLTQ2XSwgWzE1NSwgLTldXSxcbiAgICBmaXRCb3VuZHNPcHRpb25zOiB7XG4gICAgICBwYWRkaW5nOiB7dG9wOiAxMzAsIGJvdHRvbTogNzAsIGxlZnQ6IDUsIHJpZ2h0OiA1fVxuICAgIH0sXG4gICAgbWF4Wm9vbTogMTQsXG4gICAgYW50aWFsaWFzOiB0cnVlLFxuICAgIHN0eWxlOiBcInN0eWxlLmpzb25cIixcbiAgICBhdHRyaWJ1dGlvbkNvbnRyb2w6IGZhbHNlLFxuICAgIC8vIHZlcnkgbG9vc2UgdG8gYWNjb21vZGF0ZSBhbGwgb2YgYXVzIG9uIHBvcnRyYWl0IHNjcmVlbnNcbiAgICBtYXhCb3VuZHM6IFtbOTUsIC03MF0sIFsxNzAsIDE1XV0sXG4gIH0pO1xuXG4gIC8vIG9uIG1hcCBsb2FkOlxuICAvLyAtIGRpc3BhdGNoIGl0cyB2YWx1ZSBiYWNrIHRvIG9qc1xuICAvLyAtIGFkZCBhIHByb3AgdG8gdGhlIGxheWVyIHRoYXQgYWRkcy9yZW1vdmVzIGEgcG9wdXAgZnJvbSB0aGUgbWFwXG4gIC8vICAgKHdlIGNhbid0IGRvIHRoaXMgb24gaW5pdGlhbCBsYXllciBkZWYgYmVjYXVzZSB0aGUgbWFwIGlzbid0IHJlYWR5IHlldClcbiAgbWFwLm9uKFwibG9hZFwiLCAoKSA9PiB7XG4gICAgY29udGFpbmVyLnZhbHVlID0gbWFwO1xuICAgIGNvbnRhaW5lci5kaXNwYXRjaEV2ZW50KG5ldyBDdXN0b21FdmVudChcImlucHV0XCIpKTtcblxuICAgIGNvbnNvbGUubG9nKFwiTWFwIGxvYWRlZDsgYWRkaW5nIHRpbGVzXCIpXG5cbiAgICBtYXAuYWRkU291cmNlKFwic3VidXJicy1zb3VyY2VcIiwge1xuICAgICAgXCJ1cmxcIjogXCIvZGF0YS9zdWJ1cmItdGlsZXMvdGlsZXMuanNvblwiLFxuICAgICAgXCJ0eXBlXCI6IFwidmVjdG9yXCIsXG4gICAgICBcInByb21vdGVJZFwiOiBcIlNBTF9OQU1FMjFcIlxuICAgIH0pO1xuXG4gICAgLy8gdGhpcyBsYXllciBzaGFkZXMgYWxsIHN1YnVyYnNcbiAgICBjb25zb2xlLmxvZyhcIlNldHRpbmcgdGlsZSBmaWx0ZXIgdG8gbWF0Y2ggY29kZSBcIiwgc2VsZWN0ZWRTdGF0ZUNvZGUpXG4gICAgbWFwLmFkZExheWVyKHtcbiAgICAgIGlkOiBcInN1YnVyYnMtY29sb3JzXCIsXG4gICAgICBzb3VyY2U6IFwic3VidXJicy1zb3VyY2VcIixcbiAgICAgIFwic291cmNlLWxheWVyXCI6IFwic3VidXJic1wiLFxuICAgICAgdHlwZTogXCJmaWxsXCIsXG4gICAgICAvLyBmaWx0ZXIgdG8gc3RhdGUgKGJ1dCBjb21iaW5lIGFjdCBhbmQgbnN3IHRvZ2V0aGVyKVxuICAgICAgLy8gZmlsdGVyOiBcbiAgICAgICAgLy8gW1wiY2FzZVwiLFxuICAgICAgICAvLyAgIFtcIj09XCIsIHNlbGVjdGVkU3RhdGVDb2RlLnRvU3RyaW5nKCksIFwiMVwiXSxcbiAgICAgICAgLy8gICAvLyBjb21iaW5lIG5zdyBhbmQgYWN0XG4gICAgICAgIC8vICAgW1wiYW55XCIsXG4gICAgICAgIC8vICAgICBbXCI9PVwiLCBcIlNURV9DT0RFMjFcIiwgXCIxXCJdLFxuICAgICAgICAvLyAgICAgW1wiPT1cIiwgXCJTVEVfQ09ERTIxXCIsIFwiOFwiXVxuICAgICAgICAvLyAgIF0sXG4gICAgICAgIC8vICAgW1wiPT1cIiwgXCJTVEVfQ09ERTIxXCIsIHNlbGVjdGVkU3RhdGVDb2RlLnRvU3RyaW5nKCldXG4gICAgICAgIC8vIF1cbiAgICAgIGZpbHRlcjogW1wiPT1cIiwgXCJTVEVfQ09ERTIxXCIsIHNlbGVjdGVkU3RhdGVDb2RlLnRvU3RyaW5nKCldXG4gICAgfSk7XG5cbiAgICAvLyBhZGQgcGF0dGVybiBmb3IgZm9jdXNlZCBwb3N0Y29kZXNcbiAgICAvLyBtYXAubG9hZEltYWdlKFwic3RyaXBlcy5wbmdcIiwgZnVuY3Rpb24oZXJyLCBpbWFnZSkge1xuICAgIC8vICAgaWYgKGVycikgdGhyb3cgZXJyO1xuICAgIC8vICAgbWFwLmFkZEltYWdlKFwiZm9jdXNTdHJpcGVzXCIsIGltYWdlKTtcbiAgICAvLyB9KTtcblxuICAgIC8vIGZpbHRlciBhY2NvcmRpbmcgdG8gc2VsZWN0ZWQgc3RhdGVcbiAgICAvLyBjb25zb2xlLmxvZyhcIlNldHRpbmcgdGlsZSBmaWx0ZXIgdG8gbWF0Y2ggY29kZSBcIiwgc2VsZWN0ZWRTdGF0ZUNvZGUpXG4gICAgLy8gbWFwLnNldEZpbHRlcihcInN1YnVyYi1jb2xvcnNcIiwgW1wiPT1cIiwgXCJTVEVfQ09ERTIxXCIsIHNlbGVjdGVkU3RhdGVDb2RlXSlcblxuICAgIC8qIHBvcHVwICovXG5cbiAgICBjb25zdCBwb3B1cCA9IG5ldyBtYXBsaWJyZWdsLlBvcHVwKHtcbiAgICAgIGNsb3NlQnV0dG9uOiB0cnVlLFxuICAgICAgY2xvc2VPbkNsaWNrOiBmYWxzZSxcbiAgICAgIGNsYXNzTmFtZTogXCJtYXAtcG9wdXBcIlxuICAgIH0pO1xuXG4gICAgbWFwLm9uKFwiY2xpY2tcIiwgXCJzdWJ1cmJzLWNvbG9yc1wiLCBmdW5jdGlvbihlKSB7XG4gICAgICBcbiAgICAgIC8vIGNoYW5nZSB0aGUgY3Vyc29yIHN0eWxlIGFzIGEgdWkgaW5kaWNhdG9yLlxuICAgICAgY29uc29sZS5sb2coXCJNb3VzZSBlbnRlcmluZy4uLlwiKVxuICAgICAgbWFwLmdldENhbnZhcygpLnN0eWxlLmN1cnNvciA9IFwicG9pbnRlclwiO1xuXG4gICAgICAvLyBkaXNwbGF5IGEgd2FybmluZyBpZiBzdGF0cyBhcmVuJ3QgYXZhaWxhYmxlLCBvciBzaG93IHRoZW0gZm9yXG4gICAgICAvLyB0aGlzIGxheWVyIGlmIHRoZXkgYXJlXG4gICAgICBjb25zdCBzdWJ1cmJOYW1lID0gZS5mZWF0dXJlc1swXS5wcm9wZXJ0aWVzLlNBTF9OQU1FMjFcbiAgICAgIGNvbnN0IGJmUGVyY2VudCA9IGUuZmVhdHVyZXNbMF0uc3RhdGUuYmZfYXJlYV9wY3RcbiAgICAgICAgLnRvTG9jYWxlU3RyaW5nKHVuZGVmaW5lZCwge3N0eWxlOiBcInBlcmNlbnRcIn0pXG5cbiAgICAgIGNvbnN0IG5vRGF0YU1lc3NhZ2UgPVxuICAgICAgICBcIldlIGRvbid0IGhhdmUgZGF0YSBmb3IgXCIgKyBzdWJ1cmJOYW1lICtcbiAgICAgICAgXCIsIGJ1dCB0cnkgYW5vdGhlciBzdWJ1cmIgbmVhcmJ5LlwiO1xuXG4gICAgICB2YXIgZGF0YU1lc3NhZ2UgPVxuICAgICAgICBcIjxoMz5cIiArIGUuZmVhdHVyZXNbMF0ucHJvcGVydGllcy5TQUxfTkFNRTIxICsgXCI8L2gzPlwiICtcbiAgICAgICAgXCI8cD48c3Ryb25nPlwiICsgYmZQZXJjZW50ICsgXCI8L3N0cm9uZz4gXCIgK1xuICAgICAgICBcImlzIGNsYXNzaWZpZWQgYXMgYnVzaGZpcmUtcHJvbmUuPC9wPlwiXG5cbiAgICAgIHZhciBkZXNjcmlwdGlvbiA9IFxuICAgICAgICAvLyAoZS5mZWF0dXJlc1swXS5zdGF0ZS5lbnNtaW4gPT09IHVuZGVmaW5lZFxuICAgICAgICAvLyB8IGUuZmVhdHVyZXNbMF0uc3RhdGUuZW5zbWF4ID09PSB1bmRlZmluZWQpID9cbiAgICAgICAgLy8gbm9EYXRhTWVzc2FnZSA6IGRhdGFNZXNzYWdlO1xuICAgICAgICBkYXRhTWVzc2FnZTtcbiAgICAgIFxuICAgICAgLy8gcG9wdWxhdGUgcG9wdXA7IGxvY2F0ZSBiYXNlZCBvbiBtb3VzZSdzIGJhY2stcHJvamVjdGVkIHBvc2l0aW9uXG4gICAgICBwb3B1cC5zZXRMbmdMYXQoZS5sbmdMYXQpLnNldEhUTUwoZGVzY3JpcHRpb24pLmFkZFRvKG1hcCk7XG4gICAgfSk7XG4gIH0pO1xufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC01IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG4vLyBzdGFydCB3aXRoIGEgc2VhcmNoIGJveCB0byBuYXJyb3cgcG9zdGNvZGVzIGFuZCBzdWJ1cmJzIGRvd25cbnZpZXdvZiBhcmVhU2VhcmNoID0gSW5wdXRzLnNlYXJjaChzdGF0cywge1xuICBwbGFjZWhvbGRlcjogXCJFbnRlciB5b3VyIHN1YnVyYlwiLFxuICAvLyBkb24ndCBzaG93IHRoZSBudW1iZXIgb2YgcmVzdWx0c1xuICBmb3JtYXQ6ICgpID0+IGBgXG59KTtcblxuLy8gZGlzcGxheSBhIG1lbnUgb2YgcmVzdWx0cyBhbmQgYSBzZWFyY2ggYnV0dG9uIHdoZW4gd2UncmUgZG93biB0byAxMDAgcmVzdWx0c1xuXG52aWV3b2Ygc2VsZWN0ZWRTdWJ1cmIgPVxuICBhcmVhU2VhcmNoLmxlbmd0aCA+IDAgJiYgYXJlYVNlYXJjaC5sZW5ndGggPCAxMDAgP1xuICAgIElucHV0cy5zZWxlY3QoYXJlYVNlYXJjaCwge1xuICAgICAgZm9ybWF0OiBkID0+IGQuU0FMX05BTUUyMVxuICAgIH0pIDpcbiAgICBtZGBgXG5cbnZpZXdvZiBnb0J0biA9XG4gIGFyZWFTZWFyY2gubGVuZ3RoID4gMCAmJiBhcmVhU2VhcmNoLmxlbmd0aCA8IDEwMCA/XG4gICAgSW5wdXRzLmJ1dHRvbihg8J+UjSBGaW5kYCwge1xuICAgICAgcmVkdWNlOiAoKSA9PiB6b29tVG9TdWJ1cmIoc2VsZWN0ZWRTdWJ1cmIuU0FMX05BTUUyMSlcbiAgICB9KSA6XG4gIG1kYGBcblxuLy8gbmVlZCBhIHN3aXRjaCBmb3Igd2hlbiBvdXIgdGlsZSBzZWFyY2ggZmFpbHMgZHVlIHRvIGEgcG9zdGNvZGUgYmVpbmcgdG9vXG4vLyBzbWFsbCAoYml0IG9mIGEgd29ya2Fyb3VuZCBmb3Igbm90IGhhdmluZyB0aGUgdGltZSB0byByZS1kbyB0aGUgdGlsZXMhKVxubXV0YWJsZSB0aWxlU2VhcmNoRmFpbGVkID0gZmFsc2U7XG5cbmFyZWFXYXJuID1cbiAgdGlsZVNlYXJjaEZhaWxlZCA/XG4gICAgbWRg8J+UjSBUaGlzIHN1YnVyYidzIGVpdGhlciB2ZXJ5IHNtYWxsIG9yIG5vdCBpbiB2aWV3IOKAlCB6b29tIGluIG9yIG91dCBhIGJpdCBhbmQgc2VhcmNoIGFnYWluLmAgOlxuICAgIGFyZWFTZWFyY2gubGVuZ3RoID09IDAgP1xuICAgICAgbWRg4p2MIE5vIGFyZWFzIG1hdGNoZWQgdGhpcyBzZWFyY2hgIDpcbiAgICAgIG1kYGBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InN0YXRzID0gRmlsZUF0dGFjaG1lbnQoXCIvZGF0YS9iZi1wcm9uZS1wcm9jZXNzZWQuY3N2XCIpLmNzdih7IHR5cGVkOiB0cnVlIH0pO1xuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC03IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG55ZWxsb3dSZWRGaWxsID0gW1xuIDAuMCwgXCIjZmZmZmQ0XCIsXG4gMC4yLCBcIiNmZWQ5OGVcIixcbiAwLjQsIFwiI2ZlOTkyOVwiLFxuIDAuNiwgXCIjZDk1ZjBlXCIsXG4gMC44LCBcIiM5OTM0MDRcIl1cblxueWVsbG93UmVkU3Ryb2tlID0gW1xuICAwLjAsIFwiI2ZmZmY3NlwiLFxuICAwLjIsIFwiI2ZkYmUzZlwiLFxuICAwLjQsIFwiI2VhN2MwMVwiLFxuICAwLjYsIFwiI2FkNGMwYlwiLFxuICAwLjgsIFwiIzdhMjkwM1wiXVxuXG4vLyB3aGVuIHRoZSBmaWx0ZXJlZCBkYXRhIGNoYW5nZXMsIHJlam9pbiBpdCB0byB0aGUgbWFwIHRpbGVzIGFuZCB1cGRhdGUgdGhlXG4vLyBjb2xvdXIgc2NoZW1lXG51cGRhdGVNYXBEYXRhID0ge1xuXG4gIHN0YXRzLmZvckVhY2gocm93ID0+IHtcbiAgICBtYXAuc2V0RmVhdHVyZVN0YXRlKFxuICAgICAge1xuICAgICAgICBzb3VyY2U6IFwic3VidXJicy1zb3VyY2VcIixcbiAgICAgICAgc291cmNlTGF5ZXI6IFwic3VidXJic1wiLFxuICAgICAgICBpZDogcm93LlNBTF9OQU1FMjEsXG4gICAgICB9LFxuICAgICAge1xuICAgICAgICBiZl9hcmVhOnJvdy5iZl9hcmVhLFxuICAgICAgICBiZl9hcmVhX3BjdDogcm93LmJmX2FyZWFfcGN0XG4gICAgICB9XG4gICAgKTtcbiAgfSk7XG5cbiAgbWFwLnNldFBhaW50UHJvcGVydHkoXCJzdWJ1cmJzLWNvbG9yc1wiLCBcImZpbGwtY29sb3JcIixcbiAgICBbXCJjYXNlXCIsIFtcIj09XCIsXG4gICAgICBbXCJmZWF0dXJlLXN0YXRlXCIsIFwiYmZfYXJlYV9wY3RcIl0sIG51bGxdLFxuICAgICAgXCIjNjY2NjY2XCIsXG4gICAgICBbXCJpbnRlcnBvbGF0ZVwiLCBbXCJsaW5lYXJcIl0sIFtcImZlYXR1cmUtc3RhdGVcIiwgXCJiZl9hcmVhX3BjdFwiXSxcbiAgICAgICAgLi4ueWVsbG93UmVkRmlsbF1cbiAgICBdKVxuICBtYXAuc2V0UGFpbnRQcm9wZXJ0eShcInN1YnVyYnMtY29sb3JzXCIsIFwiZmlsbC1vdXRsaW5lLWNvbG9yXCIsXG4gICAgW1wiY2FzZVwiLCBbXCI9PVwiLFxuICAgICAgW1wiZmVhdHVyZS1zdGF0ZVwiLCBcImJmX2FyZWFfcGN0XCJdLCBudWxsXSxcbiAgICAgIFwiIzY2NjY2NlwiLFxuICAgICAgW1wiaW50ZXJwb2xhdGVcIiwgW1wibGluZWFyXCJdLCBbXCJmZWF0dXJlLXN0YXRlXCIsIFwiYmZfYXJlYV9wY3RcIl0sXG4gICAgICAgIC4uLnllbGxvd1JlZFN0cm9rZV1cbiAgICBdKTtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtOCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImZ1bmN0aW9uIHpvb21Ub1N1YnVyYihzdWJ1cmIpIHtcblxuICAvLyBUT0RPIC0gc3RvcCBoaWdobGlnaHRpbmcgcHJldmlvdXNseSBzZWxlY3RlZCBzdWJ1cmJcbiAgY29uc29sZS5sb2coXCJTdGFydGluZyBzZWFyY2ggZm9yIFwiICsgc3VidXJiKVxuICBcbiAgLy8gZ2V0IHRoZSBzdWJ1cmIncyBmZWF0dXJlXG4gIGNvbnN0IHRhcmdldFN1YnVyYkZlYXR1cmUgPSBtYXAucXVlcnlTb3VyY2VGZWF0dXJlcyhcInN1YnVyYnMtc291cmNlXCIsIHtcbiAgICBzb3VyY2VMYXllcjogXCJzdWJ1cmJzXCIsXG4gICAgZmlsdGVyOiBbXCI9PVwiLCBcIlNBTF9OQU1FMjFcIiwgc3VidXJiXVxuICB9KTtcblxuICBjb25zb2xlLmxvZyhcIkZlYXR1cmVzIGZvdW5kOlwiLCB0YXJnZXRTdWJ1cmJGZWF0dXJlKVxuXG4gIC8vIFRPRE8gLSB0aGlzIGlzIHdoZXJlIHdlIHNob3VsZCBjb25zaWRlciB6b29taW5nIG91dCBhbmQgc2VhcmNoaW5nIGFnYWluXG4gIGlmICh0YXJnZXRTdWJ1cmJGZWF0dXJlLmxlbmd0aCAhPSAxKSB7XG4gICAgY29uc29sZS5lcnJvcihcIkNhbiBvbmx5IHpvb20gdG8gMSBzdWJ1cmIgYXQgYSB0aW1lLCBub3QgXCIsXG4gICAgICB0YXJnZXRTdWJ1cmJGZWF0dXJlLmxlbmd0aCk7XG4gICAgbXV0YWJsZSB0aWxlU2VhcmNoRmFpbGVkID0gdHJ1ZTtcbiAgfVxuXG4gIC8vIGdldCB0aGUgZmVhdHVyZSdzIGdlb21ldHJ5XG4gIGNvbnN0IGdlb20gPSB0YXJnZXRTdWJ1cmJGZWF0dXJlWzBdLmdlb21ldHJ5LmNvb3JkaW5hdGVzWzBdO1xuXG4gIC8vIHJlZHVjZSB0aGUgZ2VvbWV0cnkgdG8gYm91bmRzXG4gIGNvbnN0IHN1YnVyYkJvdW5kcyA9IGdlb20ucmVkdWNlKFxuICAgIChhY2N1bSwgY3VycmVudCkgPT4gYWNjdW0uZXh0ZW5kKGN1cnJlbnQpLCAgICAgICAgXG4gICAgbmV3IG1hcGxpYnJlZ2wuTG5nTGF0Qm91bmRzKGdlb21bMF0sIGdlb21bMF0pKTtcblxuICAvLyB6b29tIHRvIHN1YnVyYlxuICBtYXAuZml0Qm91bmRzKHN1YnVyYkJvdW5kcywge1xuICAgIHBhZGRpbmc6IHt0b3A6IDQwLCBib3R0b206IDMwLCBsZWZ0OiAxMCwgcmlnaHQ6IDEwfSxcbiAgICBtYXhab29tOiAxMlxuICB9KTtcblxuICAvLyBoaWdobGlnaHQgc3VidXJiP1xuICBtYXAuc2V0RmVhdHVyZVN0YXRlKFxuICAgIHtcbiAgICAgIHNvdXJjZTogXCJzdWJ1cmJzLXNvdXJjZVwiLFxuICAgICAgc291cmNlTGF5ZXI6IFwic3VidXJic1wiLFxuICAgICAgaWQ6IHN1YnVyYixcbiAgICB9LFxuICAgIHsgaW5Gb2N1czogdHJ1ZSB9XG4gICk7XG4gIFxuXG4gIC8vIGRpc3BsYXkgaW5mbyBwYW5lbFxuICAvLyAoaGlkZSB0aGUgYXJlYSBjb250cm9scyB3aGVuIGEgbW9kYWwgaXMgb3BlbilcbiAgc2V0VGltZW91dChcbiAgICBtaWNyby5zaG93KFwibW9kYWwtZm9jdXNlZC1zdWJ1cmJcIiwge1xuICAgICAgb25TaG93OiAoKSA9PiBcbiAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJhcmVhLXNlYXJjaC1jb250cm9sc1wiKS5jbGFzc0xpc3QuYWRkKFwiaGlkZVwiKSxcbiAgICAgIG9uQ2xvc2U6ICgpID0+IFxuICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImFyZWEtc2VhcmNoLWNvbnRyb2xzXCIpLmNsYXNzTGlzdC5yZW1vdmUoXCJoaWRlXCIpXG4gICAgICB9KSxcbiAgICAxMDAwKTtcblxufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC05IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiXG5zZWxlY3RlZFN1YnVyYkRhdGEgPSBzdGF0c1xuICAuZmlsdGVyKGQgPT4gZC5TQUxfTkFNRTIxID09IHNlbGVjdGVkU3VidXJiLlNBTF9OQU1FMjEpXG5cbmFueURhdGEgPSBzZWxlY3RlZFN1YnVyYkRhdGEubGVuZ3RoID4gMDtcblxuZGF0YVN3aXRjaCA9IHtcbiAgaWYgKGFueURhdGEpIHtcbiAgICAvLyBzaG93IC5zdGF0cy1jb250ZW50OyBoaWRlIC5uby1zdGF0c1xuICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwibm8tc3RhdHNcIikuY2xhc3NMaXN0LnJlbW92ZShcInNob3dcIik7XG4gICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJzdGF0cy1jb250ZW50XCIpLmNsYXNzTGlzdC5hZGQoXCJzaG93XCIpO1xuICB9IGVsc2Uge1xuICAgIC8vIGhpZGUgLnN0YXRzLWNvbnRlbnQ7IHNob3cgLm5vLXN0YXRzXG4gICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJuby1zdGF0c1wiKS5jbGFzc0xpc3QuYWRkKFwic2hvd1wiKTtcbiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcInN0YXRzLWNvbnRlbnRcIikuY2xhc3NMaXN0LnJlbW92ZShcInNob3dcIik7XG4gIH1cbn1cblxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xMCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ilxuc2VsZWN0ZWRTdWJ1cmJOYW1lID0gc2VsZWN0ZWRTdWJ1cmJEYXRhWzBdLlNBTF9OQU1FMjFcbnNlbGVjdGVkU3VidXJiUGVyY2VudCA9XG4gIHNlbGVjdGVkU3VidXJiRGF0YVswXS5iZl9hcmVhX3BjdC50b0xvY2FsZVN0cmluZyh1bmRlZmluZWQsIHtzdHlsZTogXCJwZXJjZW50XCJ9KVxuc2VsZWN0ZWRTdWJ1cmJBcmVhID0gKHNlbGVjdGVkU3VidXJiRGF0YVswXS5iZl9hcmVhIHx8IDApLnRvRml4ZWQoMSlcblxubWRgJHtzZWxlY3RlZFN1YnVyYlBlcmNlbnR9IG9mICR7c2VsZWN0ZWRTdWJ1cmJOYW1lfSAoJHtzZWxlY3RlZFN1YnVyYkFyZWF9IHNxLiBrbSkgaXMgY2xhc3NpZmllZCBhcyBidXNoZmlyZS1wcm9uZS5gXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ21hcCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdhcmVhU2VhcmNoJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3NlbGVjdGVkU3VidXJiJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2dvQnRuJykifV19
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../map";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+  tabsets.forEach(function(tabset) {
+    const tabby = new Tabby('#' + tabset.id);
+  });
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'light-border',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        typesetMath(container);
+        return container.innerHTML
+      } else {
+        typesetMath(note);
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+
+
+
+
+</body></html>
