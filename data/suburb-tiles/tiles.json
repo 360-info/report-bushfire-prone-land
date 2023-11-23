@@ -8,7 +8,7 @@
   "format": "pbf",
   "legend": "",
   "maxzoom": 9,
-  "minzoom": 0,
+  "minzoom": 5,
   "profile": "mercator",
   "version": "1",
   "generator": "tippecanoe",
@@ -31,12 +31,12 @@
               "SHAPE_Area": "Number"
           },
           "maxzoom": 9,
-          "minzoom": 0,
+          "minzoom": 5,
           "description": "ASGS 2021 suburb boundaries"
       }
   ],
   "crs": "EPSG:3857",
   "tiles": [
-    "https://dev-map.360info-bushfire-prone-land.pages.dev/data/suburb-tiles/{z}/{x}/{y}.pbf"
+    "http://localhost:5001/data/suburb-tiles/{z}/{x}/{y}.pbf"
   ]
 }
