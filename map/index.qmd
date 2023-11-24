@@ -122,29 +122,8 @@ viewof map = {
       source: "suburbs-source",
       "source-layer": "suburbs",
       type: "fill",
-      // filter to state (but combine act and nsw together)
-      // filter: 
-        // ["case",
-        //   ["==", selectedStateCode.toString(), "1"],
-        //   // combine nsw and act
-        //   ["any",
-        //     ["==", "STE_CODE21", "1"],
-        //     ["==", "STE_CODE21", "8"]
-        //   ],
-        //   ["==", "STE_CODE21", selectedStateCode.toString()]
-        // ]
       filter: ["==", "STE_CODE21", selectedStateCode.toString()]
     });
-
-    // add pattern for focused postcodes
-    // map.loadImage("stripes.png", function(err, image) {
-    //   if (err) throw err;
-    //   map.addImage("focusStripes", image);
-    // });
-
-    // filter according to selected state
-    // console.log("Setting tile filter to match code ", selectedStateCode)
-    // map.setFilter("suburb-colors", ["==", "STE_CODE21", selectedStateCode])
 
     /* popup */
 
@@ -174,15 +153,9 @@ viewof map = {
         "<h3>" + e.features[0].properties.SAL_NAME21 + "</h3>" +
         "<p><strong>" + bfPercent + "</strong> " +
         "is classified as bushfire-prone.</p>"
-
-      var description = 
-        // (e.features[0].state.ensmin === undefined
-        // | e.features[0].state.ensmax === undefined) ?
-        // noDataMessage : dataMessage;
-        dataMessage;
       
       // populate popup; locate based on mouse's back-projected position
-      popup.setLngLat(e.lngLat).setHTML(description).addTo(map);
+      popup.setLngLat(e.lngLat).setHTML(dataMessage).addTo(map);
     });
   });
 }
@@ -232,7 +205,7 @@ areaWarn =
 //| label: get-data
 stats = FileAttachment("/data/bf-prone-processed.csv").csv({ typed: true });
 
-stateStats = state.filter(d => d.STE_CODE21 == selectedStateCode)
+stateStats = stats.filter(d => d.STE_CODE21 == selectedStateCode)
 ```
 
 ```{ojs}
@@ -291,53 +264,24 @@ updateMapData = {
 
 ```{ojs}
 //| label: zoom-to-suburb-fn
-async function zoomToSuburb(suburb) {
+function zoomToSuburb(suburb) {
 
   // TODO - stop highlighting previously selected suburb
   console.log("Starting search for " + suburb)
   
-  // get the suburb's feature
-  let targetSuburbFeature = map.querySourceFeatures("suburbs-source", {
-    sourceLayer: "suburbs",
-    filter: ["==", "SAL_NAME21", suburb]
-  });
+  // zoom to the suburb based on its centroid
+  const targetSuburb = stateStats.filter(d => d.SAL_NAME21 == suburb)
 
-  console.log("Features found:", targetSuburbFeature)
-
-  // if not found, zoom out and try again (doesn't work)
-  if (targetSuburbFeature.length == 0) {
-    map.jumpTo(
-      map.cameraForBounds(initBounds[selectedState], {
-        padding: {top: 100, bottom: 5, left: 5, right: 5},   
-      }));
-
-    targetSuburbFeature = await Promises.delay(4000,
-      map.querySourceFeatures("suburbs-source", {
-        sourceLayer: "suburbs",
-        filter: ["==", "SAL_NAME21", suburb]
-      }));
-    console.log("Features found second time:", targetSuburbFeature)
-  }
-
-  if (targetSuburbFeature.length != 1) {
+  if (targetSuburb.length != 1) {
     console.error("Can only zoom to 1 suburb at a time, not ",
-      targetSuburbFeature.length);
+      targetSuburb.length);
     mutable tileSearchFailed = true;
+  } else {
+    map.flyTo({
+      center: [targetSuburb[0].cent_lon, targetSuburb[0].cent_lat],
+      zoom: 10
+    })
   }
-
-  // get the feature's geometry
-  const geom = targetSuburbFeature[0].geometry.coordinates[0];
-
-  // reduce the geometry to bounds
-  const suburbBounds = geom.reduce(
-    (accum, current) => accum.extend(current),        
-    new maplibregl.LngLatBounds(geom[0], geom[0]));
-
-  // zoom to suburb
-  map.fitBounds(suburbBounds, {
-    padding: {top: 40, bottom: 30, left: 10, right: 10},
-    maxZoom: 12
-  });
 
   // highlight suburb?
   map.setFeatureState(
@@ -348,7 +292,6 @@ async function zoomToSuburb(suburb) {
     },
     { inFocus: true }
   );
-  
 
   // display info panel
   // (hide the area controls when a modal is open)
