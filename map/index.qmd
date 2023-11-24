@@ -88,7 +88,7 @@ viewof map = {
     // bounds: [[111, -46], [155, -9]],
     bounds: initBounds[selectedState],
     fitBoundsOptions: {
-      padding: {top: 130, bottom: 70, left: 5, right: 5}
+      padding: {top: 100, bottom: 5, left: 5, right: 5}
     },
     minZoom: 5,
     maxZoom: 14,
@@ -193,7 +193,7 @@ viewof map = {
 //| classes: areaInputForm
 
 // start with a search box to narrow postcodes and suburbs down
-viewof areaSearch = Inputs.search(stats, {
+viewof areaSearch = Inputs.search(stateStats, {
   placeholder: "Enter your suburb",
   // don't show the number of results
   format: () => ``
@@ -231,6 +231,8 @@ areaWarn =
 ```{ojs}
 //| label: get-data
 stats = FileAttachment("/data/bf-prone-processed.csv").csv({ typed: true });
+
+stateStats = state.filter(d => d.STE_CODE21 == selectedStateCode)
 ```
 
 ```{ojs}
@@ -254,7 +256,7 @@ yellowRedStroke = [
 // colour scheme
 updateMapData = {
 
-  stats.forEach(row => {
+  stateStats.forEach(row => {
     map.setFeatureState(
       {
         source: "suburbs-source",
@@ -263,7 +265,9 @@ updateMapData = {
       },
       {
         bf_area:row.bf_area,
-        bf_area_pct: row.bf_area_pct
+        bf_area_pct: row.bf_area_pct,
+        cent_lat: row.cent_lat,
+        cent_lon: row.cent_lon
       }
     );
   });
@@ -287,20 +291,34 @@ updateMapData = {
 
 ```{ojs}
 //| label: zoom-to-suburb-fn
-function zoomToSuburb(suburb) {
+async function zoomToSuburb(suburb) {
 
   // TODO - stop highlighting previously selected suburb
   console.log("Starting search for " + suburb)
   
   // get the suburb's feature
-  const targetSuburbFeature = map.querySourceFeatures("suburbs-source", {
+  let targetSuburbFeature = map.querySourceFeatures("suburbs-source", {
     sourceLayer: "suburbs",
     filter: ["==", "SAL_NAME21", suburb]
   });
 
   console.log("Features found:", targetSuburbFeature)
 
-  // TODO - this is where we should consider zooming out and searching again
+  // if not found, zoom out and try again (doesn't work)
+  if (targetSuburbFeature.length == 0) {
+    map.jumpTo(
+      map.cameraForBounds(initBounds[selectedState], {
+        padding: {top: 100, bottom: 5, left: 5, right: 5},   
+      }));
+
+    targetSuburbFeature = await Promises.delay(4000,
+      map.querySourceFeatures("suburbs-source", {
+        sourceLayer: "suburbs",
+        filter: ["==", "SAL_NAME21", suburb]
+      }));
+    console.log("Features found second time:", targetSuburbFeature)
+  }
+
   if (targetSuburbFeature.length != 1) {
     console.error("Can only zoom to 1 suburb at a time, not ",
       targetSuburbFeature.length);
@@ -363,7 +381,7 @@ function zoomToSuburb(suburb) {
 //| label: info-panel
 //| classes: focusPanel
 
-selectedSuburbData = stats
+selectedSuburbData = stateStats
   .filter(d => d.SAL_NAME21 == selectedSuburb.SAL_NAME21)
 
 anyData = selectedSuburbData.length > 0;
