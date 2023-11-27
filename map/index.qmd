@@ -318,7 +318,11 @@ function zoomToSuburb(suburb) {
   } else {
     map.flyTo({
       center: [targetSuburb[0].cent_lon, targetSuburb[0].cent_lat],
-      zoom: 10
+      zoom:
+            targetSuburb[0].SHAPE_Area > 0.1 ? 4 :
+              targetSuburb[0].SHAPE_Area > 0.05 ? 6 :
+                targetSuburb[0].SHAPE_Area > 0.005 ? 7 :
+                  targetSuburb[0].SHAPE_Area > 0.0025 ? 9 : 10
     })
   }
 
