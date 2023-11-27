@@ -136,10 +136,22 @@ viewof map = {
       filter: ["==", "STE_CODE21", selectedStateCode.toString()]
     });
 
-    // stripe if selected
-    map.loadImage("stripes.png", function(err, image) {
-      if (err) throw err;
-      map.addImage("focusStripes", image);
+    // duplicate layer for selected suburb
+    map.addLayer({
+      id: "selected-suburb",
+      source: "suburbs-source",
+      "source-layer": "suburbs",
+      filter: ["==", "SAL_NAME21", ""],
+      type: "line",
+      paint: {
+        "line-width": 3,
+        "line-color": "black",
+        "line-dasharray": [3, 2],
+      },
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      }
     });
 
     /* popup */
@@ -219,6 +231,13 @@ areaWarn =
 
 
 ```{ojs}
+//| label: update-selected-area-outline
+map.setFilter("selected-suburb",
+  ["==", "SAL_NAME21", selectedSuburb.SAL_NAME21])
+```
+
+
+```{ojs}
 //| label: get-data
 stats = FileAttachment("/data/bf-prone-processed.csv").csv({ typed: true });
 
@@ -262,6 +281,8 @@ updateMapData = {
     );
   });
 
+  console.log("Adding map colours"),
+
   map.setPaintProperty("suburbs-colors", "fill-color",
     ["case", ["==",
       ["feature-state", "bf_area_pct"], null],
@@ -269,6 +290,7 @@ updateMapData = {
       ["interpolate", ["linear"], ["feature-state", "bf_area_pct"],
         ...yellowRedFill]
     ])
+
   map.setPaintProperty("suburbs-colors", "fill-outline-color",
     ["case", ["==",
       ["feature-state", "bf_area_pct"], null],
@@ -276,13 +298,6 @@ updateMapData = {
       ["interpolate", ["linear"], ["feature-state", "bf_area_pct"],
         ...yellowRedStroke]
     ]);
-    
-  // TODO - also set fill pattern if highlighted
-  // map.setPaintProperty("postcode-colors", "fill-pattern",
-  //     ["case", ["==", ["feature-state", "isFocused"], true],
-  //       "focusStripes",
-  //       null
-  //     ]);
 }
 ```
 
