@@ -321,8 +321,7 @@ function zoomToSuburb(suburb) {
 
 ::::: {#modal-focused-suburb-content}
 ```{ojs}
-//| label: info-panel
-//| classes: focusPanel
+//| label: modal-processing
 
 selectedSuburbData = stateStats
   .filter(d => d.SAL_NAME21 == selectedSuburb.SAL_NAME21)
@@ -360,7 +359,7 @@ selectedSuburbPercent =
   selectedSuburbData[0].bf_area_pct.toLocaleString(undefined, {style: "percent"})
 selectedSuburbArea = (selectedSuburbData[0].bf_area || 0).toFixed(1)
 
-md`${selectedSuburbPercent} of ${selectedSuburbName} (${selectedSuburbArea} sq. km) is classified as bushfire-prone.`
+md`**${selectedSuburbPercent}** of ${selectedSuburbName} (about ${selectedSuburbArea} sq. km) is classified as bushfire-prone.`
 ```
 
 ::::
