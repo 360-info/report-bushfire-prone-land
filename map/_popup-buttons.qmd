@@ -59,11 +59,11 @@
   * Editor names, 360info (hint: put &shy; in the middle of long names!)
   * Data: ORG
   (if there isn't room, put it in the ABOUT dialog) -->
-James Goldie, 360info &  
-Dean Marchiori,  
+James Goldie, 360info  
+& Dean Marchiori,  
 Wave Data Labs
 
-Data: NSW DPIE
+Data: XXX
 
 ::::
 

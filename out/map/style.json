@@ -12,7 +12,7 @@
       "id": "background",
       "type": "background",
       "paint": {
-        "background-color": "#eeeeee"
+        "background-color": "#97f1fc"
       },
       "filter": [
         "all"

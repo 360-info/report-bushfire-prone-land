@@ -122,7 +122,7 @@ viewof map = {
       "source-layer": "auscoast",
       type: "fill",
       paint: {
-        "fill-color": "#cccccc"
+        "fill-color": "#56e8ae"
       }
     });
 
@@ -350,17 +350,13 @@ dataSwitch = {
     document.getElementById("stats-content").classList.remove("show");
   }
 }
-
 ```
-
 
 :::: {#no-stats}
 ❌ We don't have any data for this suburb, but try another one nearby.
 ::::
 
 :::: {#stats-content}
-
-### ${selectedSuburbData.SAL_NAME21}
 
 ```{ojs}
 //| label: selected-suburb-fields
@@ -370,7 +366,7 @@ selectedSuburbPercent =
   selectedSuburbData[0].bf_area_pct.toLocaleString(undefined, {style: "percent"})
 selectedSuburbArea = (selectedSuburbData[0].bf_area || 0).toFixed(1)
 
-md`**${selectedSuburbPercent}** of ${selectedSuburbName} (about ${selectedSuburbArea} sq. km) is classified as bushfire-prone.`
+html`<p style="font-size: 125%"><strong>${selectedSuburbPercent}</strong> of ${selectedSuburbName} (about ${selectedSuburbArea} sq. km) is classified as bushfire-prone.</p>`
 ```
 
 ::::
