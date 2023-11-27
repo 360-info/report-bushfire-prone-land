@@ -166,6 +166,7 @@ viewof map = {
       // display a warning if stats aren't available, or show them for
       // this layer if they are
       const suburbName = e.features[0].properties.SAL_NAME21
+      const bfArea = (e.features[0].state.bf_area || 0).toFixed(1)
       const bfPercent = e.features[0].state.bf_area_pct
         .toLocaleString(undefined, {style: "percent"})
 
@@ -176,6 +177,7 @@ viewof map = {
       var dataMessage =
         "<h3>" + e.features[0].properties.SAL_NAME21 + "</h3>" +
         "<p><strong>" + bfPercent + "</strong> " +
+        "(about " + bfArea + " sq. km) " +
         "is classified as bushfire-prone.</p>"
       
       // populate popup; locate based on mouse's back-projected position
