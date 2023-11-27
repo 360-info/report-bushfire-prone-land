@@ -34,7 +34,6 @@ allStates = ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "NT", "ACT"]
 selectedState = {
   const pageURL = new URL(window.location.href)
   const stateChoice = pageURL.searchParams.get("state")?.toUpperCase()
-  // console.log("State choice:", stateChoice)
   return allStates.includes(stateChoice) ? stateChoice : "NSW"
 }
 selectedStateCode = allStates.indexOf(selectedState) + 1
@@ -107,8 +106,6 @@ viewof map = {
     container.value = map;
     container.dispatchEvent(new CustomEvent("input"));
 
-    console.log("Map loaded; adding tiles")
-
     map.addSource("suburbs-source", {
       "url": "/data/suburb-tiles/tiles.json",
       "type": "vector",
@@ -127,7 +124,6 @@ viewof map = {
     });
 
     // this layer shades all suburbs
-    console.log("Setting tile filter to match code ", selectedStateCode)
     map.addLayer({
       id: "suburbs-colors",
       source: "suburbs-source",
@@ -165,7 +161,6 @@ viewof map = {
     map.on("click", "suburbs-colors", function(e) {
       
       // change the cursor style as a ui indicator.
-      console.log("Mouse entering...")
       map.getCanvas().style.cursor = "pointer";
 
       // display a warning if stats aren't available, or show them for
@@ -281,8 +276,6 @@ updateMapData = {
     );
   });
 
-  console.log("Adding map colours"),
-
   map.setPaintProperty("suburbs-colors", "fill-color",
     ["case", ["==",
       ["feature-state", "bf_area_pct"], null],
@@ -304,9 +297,6 @@ updateMapData = {
 ```{ojs}
 //| label: zoom-to-suburb-fn
 function zoomToSuburb(suburb) {
-
-  // TODO - stop highlighting previously selected suburb
-  console.log("Starting search for " + suburb)
   
   // zoom to the suburb based on its centroid
   const targetSuburb = stateStats.filter(d => d.SAL_NAME21 == suburb)
@@ -319,10 +309,10 @@ function zoomToSuburb(suburb) {
     map.flyTo({
       center: [targetSuburb[0].cent_lon, targetSuburb[0].cent_lat],
       zoom:
-            targetSuburb[0].SHAPE_Area > 0.1 ? 4 :
-              targetSuburb[0].SHAPE_Area > 0.05 ? 6 :
-                targetSuburb[0].SHAPE_Area > 0.005 ? 7 :
-                  targetSuburb[0].SHAPE_Area > 0.0025 ? 9 : 10
+        targetSuburb[0].SHAPE_Area > 0.1 ? 4 :
+          targetSuburb[0].SHAPE_Area > 0.05 ? 6 :
+            targetSuburb[0].SHAPE_Area > 0.005 ? 7 :
+              targetSuburb[0].SHAPE_Area > 0.0025 ? 9 : 10
     })
   }
 
