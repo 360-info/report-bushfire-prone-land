@@ -115,6 +115,17 @@ viewof map = {
       "promoteId": "SAL_NAME21"
     });
 
+    // coastline bg
+    map.addLayer({
+      id: "coastline",
+      source: "suburbs-source",
+      "source-layer": "auscoast",
+      type: "fill",
+      paint: {
+        "fill-color": "#cccccc"
+      }
+    });
+
     // this layer shades all suburbs
     console.log("Setting tile filter to match code ", selectedStateCode)
     map.addLayer({

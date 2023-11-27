@@ -32,8 +32,22 @@
           },
           "maxzoom": 9,
           "minzoom": 5,
-          "description": "ASGS 2021 suburb boundaries"
-      }
+          "description": "ASGS 2021 suburb boundaries and coastline"
+      },
+      {
+        "id": "auscoast",
+        "fields": {
+            "AREASQKM21":"Number",
+            "AUS_CODE21":"String",
+            "AUS_NAME21":"String",
+            "CHG_FLAG21":"String",
+            "CHG_LBL21":"String",
+            "LOCI_URI21":"String"
+        },
+        "maxzoom": 9,
+        "minzoom": 5,
+        "description": "ASGS 2021 suburb boundaries and coastline"
+    }
   ],
   "crs": "EPSG:3857",
   "tiles": [
