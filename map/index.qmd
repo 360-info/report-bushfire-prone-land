@@ -7,7 +7,7 @@ css:
 resources:
   # - news-heat-postcodes-featuremedia.png
   - style.json
-  # - stripes.png
+  - stripes.png
 ---
 
 ```{ojs}
@@ -134,6 +134,12 @@ viewof map = {
       "source-layer": "suburbs",
       type: "fill",
       filter: ["==", "STE_CODE21", selectedStateCode.toString()]
+    });
+
+    // stripe if selected
+    map.loadImage("stripes.png", function(err, image) {
+      if (err) throw err;
+      map.addImage("focusStripes", image);
     });
 
     /* popup */
@@ -270,6 +276,13 @@ updateMapData = {
       ["interpolate", ["linear"], ["feature-state", "bf_area_pct"],
         ...yellowRedStroke]
     ]);
+    
+  // TODO - also set fill pattern if highlighted
+  // map.setPaintProperty("postcode-colors", "fill-pattern",
+  //     ["case", ["==", ["feature-state", "isFocused"], true],
+  //       "focusStripes",
+  //       null
+  //     ]);
 }
 ```
 
@@ -301,7 +314,7 @@ function zoomToSuburb(suburb) {
       sourceLayer: "suburbs",
       id: suburb,
     },
-    { inFocus: true }
+    { isFocused: true }
   );
 
   // display info panel
