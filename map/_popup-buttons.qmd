@@ -117,7 +117,7 @@ ${"Data:&nbsp;" + sources[selectedState]}
         let fragments = [];
         const stateChoice = pageURL.searchParams.get("state");
         if (stateChoice !== undefined) {
-          fragments.push("month=" + stateChoice);
+          fragments.push("state=" + stateChoice);
         }
         const fragmentString = fragments.join("&");
 
