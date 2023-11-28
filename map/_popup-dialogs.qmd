@@ -22,7 +22,9 @@ Please acknowledge [360info](https://360info.org) and our data sources when you 
 * NT: [Bushfires NT](https://nt.gov.au/emergency/bushfire/prepare-and-plan/fire-protection-zones)
 * ACT: [EPSD](https://actmapi-actgov.opendata.arcgis.com/datasets/7c4ae4305e6b43cfb2135cf7fde498f4/about)
 
-#### Embed this chart in your article
+Suburbs and coastline are courtesy of the [Australian Bureau of Statistics](https://maps.abs.gov.au/).
+
+#### Embed this map in your article
 
 Copy and paste the following code:
 
