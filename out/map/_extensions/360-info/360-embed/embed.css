@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap");
+
+body {
+  font-family: 'Roboto Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+a {
+  color: #36a7e9
+}
+
+a:visited {
+  color: #1481c9;
+}
+
+.custom-title-block {
+  position: absolute;
+  margin-right: 160px;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  z-index: 1000;
+  color: color;
+  /* background: #00000088; */
+}
+
+.custom-title-block h1,
+.custom-title-block  p {
+  margin-block-start: 0;
+}
+
+.custom-title-block h1 {
+  text-transform: uppercase;
+  font-weight: 900;
+  margin-block-end: 0.2em;
+}
+
+.custom-title-block p {
+  font-weight: 400;
+  margin-block-end: 0;
+}
+
+
+/* shrink header elements at lower widths */
+@media (max-width: 45em) {
+  .custom-title-block {
+    font-size: 90%;
+  }
+
+  .inputForm {
+    transform: scale(0.9);
+    transform-origin: bottom left;
+  }
+}
+
+@media (max-width: 34em) {
+  .custom-title-block {
+    font-size: 80%;
+  }
+
+  .inputForm {
+    transform: scale(0.9);
+    transform-origin: bottom left;
+  }
+}
+
+.embedcode {
+  font-size: small;
+  padding: 1em;
+  border-inline-start: 1px solid #36a7e9;
+  background-color: #36a7e911;
+  color: #36a7e9;
+}
+
+.embedcode pre {
+  margin: 0;
+}
+
+.embedcode code {
+  font-family: "Fira Code", monospace;
+  white-space: normal;
+}
+
+#area-search-controls {
+  z-index: 1000;
+  position: absolute;
+  top: 10em;
+  left: 10px;
+  color: black;
+  padding: 0;
+  margin-bottom: 0;
+  width: 212px;
+  font-size: 80%;
+  box-shadow: 0px 10px 10px rgba(0,0,0,0.25);
+  background: #ffffffe2;
+  border-radius: 8px;
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+}
+
+#area-search-controls.hide {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+#area-search-controls form {
+  margin: var(--length2) 0;
+}
+
+/* inputs.select doesn't respect width option properly... */
+#area-search-controls select, #area-search-controls form input, #area-search-controls button, #area-search-controls p {
+  width: 200px;
+  position: relative;
+  left: 6px;
+  border: none;
+  margin: 0;
+}
+
+#area-search-controls select, #area-search-controls form input {
+  background: none;
+  color: black;
+}
+
+#area-search-controls form input {
+  border-bottom: 1px solid black;
+}
+
+#area-search-controls button {
+  background: #36a7e9;
+  color: white !important;
+  height: 2em;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 8px;
+  box-shadow: 0px 5px 5px #00000022;
+}
+
+#area-search-controls p {
+  margin-bottom: 10px;
+}
+
+#area-search-controls input::placeholder {
+  color: black;
+}
+
+/* ... and the "results" part of the text input still reserves space :( */
+#area-search-controls form output {
+  flex: 0;
+}
+
+.focusPanel {
+  z-index: 1000;
+  position: absolute;
+  top: 150px;
+  background-color: #ffffffcc;
+  color: black;
+  padding: 8px;
+  width: calc(100vw - 16px);
+  margin-bottom: 0;
+}
+
+.map-popup {
+  max-width: 100%;
+  font-family: 'Roboto Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+}
+
+.maplibregl-popup-content h3 {
+  margin-block-start: -0.2em;
+}
+
+.maplibregl-popup-content p {
+  margin-block-end: 0;
+}
+
+.maplibregl-popup-close-button {
+  font-size: 200%;
+}
+
+/* style info box when you zoom in */
+#modal-focused-suburb {
+  text-align: center;
+}
+
+#modal-focused-suburb .modal__overlay {
+  align-items: flex-end;
+  padding: 10px;
+  background: rgba(0,0,0,0.15);
+}
+
+#modal-focused-suburb .modal__container {
+  padding: 1.5em;
+  border-radius: 12px;
+  max-width: 400px;
+}
+
+#modal-focused-suburb h3 {
+  text-transform: uppercase;
+}
+
+#modal-focused-suburb p {
+  color: #666666;
+  font-size: 75%;
+}
+
+#modal-focused-suburb p .projection-range {
+  font-size: 200%;
+  font-weight: 900;
+  color: black;
+}
+
+/* stats detail: show either a warning or modal content */
+#no-stats, #stats-content {
+  display: none;
+}
+
+#no-stats.show, #stats-content.show {
+  display: block;
+}

@@ -1,0 +1,68 @@
+<!-- initialise miromodal.js -->
+
+::::::: {#modal-useremix .modal .micromodal-slide aria-hidden="true"}
+:::::: {.modal__overlay tabindex="-1" data-micromodal-close="true"}
+::::: {.modal__container role="dialog" aria-modal="true" aria-labelledby="modal-useremix-title"}
+
+<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+
+:::: {#modal-useremix-content}
+## Use + Remix
+
+These charts, as well as the analyses that underpin them, are available under a [**Creative Commons Attribution 4.0 licence**](https://creativecommons.org/licenses/by/4.0).
+
+Please acknowledge [360info](https://360info.org) and our data sources when you use these charts and data:
+
+* NSW: [RFS](https://datasets.seed.nsw.gov.au/dataset/bush-fire-prone-land)
+* VIC: [DEECA](https://discover.data.vic.gov.au/dataset/designated-bushfire-prone-area-bpa)
+* Qld: [QFES](https://www.data.qld.gov.au/dataset/bushfire-prone-area-queensland-series)
+* SA: [DTI](https://data.sa.gov.au/data/dataset/bushfire-protection-areas)
+* WA: [DFES](https://catalogue.data.wa.gov.au/dataset/bush-fire-prone-areas-2021-obrm-019)
+* TAS: [TPC](https://listdata.thelist.tas.gov.au/opendata)
+* NT: [Bushfires NT](https://nt.gov.au/emergency/bushfire/prepare-and-plan/fire-protection-zones)
+* ACT: [EPSD](https://actmapi-actgov.opendata.arcgis.com/datasets/7c4ae4305e6b43cfb2135cf7fde498f4/about)
+
+#### Embed this chart in your article
+
+Copy and paste the following code:
+
+::: {.embedcode}
+```
+{{< meta 360embed.before >}}{{< meta 360embed.url >}}?state=...{{< meta 360embed.after >}}
+```
+:::
+
+This content is subject to [360info's Terms of Use](https://newshub.360info.org/page/terms).
+::::
+
+:::::
+::::::
+:::::::
+
+<!-- notes dialog -->
+
+::::::: {#modal-about .modal .micromodal-slide aria-hidden="true"}
+:::::: {.modal__overlay tabindex="-1" data-micromodal-close="true"}
+::::: {.modal__container role="dialog" aria-modal="true" aria-labelledby="modal-about-title"}
+
+<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+
+<header>
+## About {#modal-about-title}
+</header>
+
+:::: {#modal-about-content}
+Each Australian state and territory maps out bushfire risk differently. Some mark out all areas with vegetation that can support a bushfire, while others choose to focus on the protection of populated areas.
+
+Regardless of their name, on this map, suburbs in [brown]{style="font-weight: bold; color: #993404"} have a **high percentage of areas marked for bushfire planning.**
+
+These areas are also used by firefighters and planning authorities to consider where the greatest risk may lie.
+
+Although rules vary, many states and territories legally require people building in bushfire prone areas (or similarly named areas) to meet a bushfire resilience standard.
+
+Some also impose obligations on landholders even if they aren't building.
+::::
+
+:::::
+::::::
+:::::::

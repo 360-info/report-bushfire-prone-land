@@ -23,3 +23,15 @@ aus <- bind_rows(
 )
 
 write_sf(aus, here("data/final/aus.gpkg"))
+
+# also run stats off flat with centroids
+aus |>
+    st_transform(st_crs(4326)) |>
+    st_centroid(of_largest_polygon = TRUE) |>
+    mutate(centroid = st_coordinates(geom)) |>
+    mutate(
+        cent_lat = centroid[, "Y"],
+        cent_lon = centroid[, "X"]) |>
+    select(-centroid) |>
+    st_drop_geometry() |>
+    write_csv(here("data", "bf-prone-processed.csv"))

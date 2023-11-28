@@ -15,17 +15,13 @@ Thumbs.db
 # quarto
 /.quarto/
 
-# output folder (you may want to exclude files when we publish!)
-/out/*
-!/out
+/out
 
 # ignore data  
-/data/*
-!/data/README.md  
-!/data/final
-/data/final/*
-!/data/final/anim/
-!/data/final/anim_wa/
+# /data/*
+# !/data/README.md
+# !/data/suburb-tiles/*
+# !/data/suburb-tiles/*/*/*/*.pbf
 
 # working file 
 TODO.txt

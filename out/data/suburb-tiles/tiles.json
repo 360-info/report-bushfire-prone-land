@@ -1,0 +1,56 @@
+{
+  "tilejson": "2.0.0",
+  "name": "suburbs-source",
+  "type": "baselayer",
+  "scale": "1.000000",
+  "bounds": [110, -60, 160, -10],
+  "center": [135, -35, 3],
+  "format": "pbf",
+  "legend": "",
+  "maxzoom": 9,
+  "minzoom": 5,
+  "profile": "mercator",
+  "version": "1",
+  "generator": "tippecanoe",
+  "attribution": " ",
+  "description": "",
+  "vector_layers": [
+      {
+          "id": "suburbs",
+          "fields": {
+              "id": "Integer64",
+              "SAL_CODE21": "String",
+              "SAL_NAME21": "String",
+              "STE_CODE21": "String",
+              "STE_NAME21": "String",
+              "AUS_CODE21": "String",  
+              "AUS_NAME21": "String",
+              "AREASQKM21": "Number",
+              "LOCI_URI21": "String",
+              "SHAPE_Leng": "Number",
+              "SHAPE_Area": "Number"
+          },
+          "maxzoom": 9,
+          "minzoom": 5,
+          "description": "ASGS 2021 suburb boundaries and coastline"
+      },
+      {
+        "id": "auscoast",
+        "fields": {
+            "AREASQKM21":"Number",
+            "AUS_CODE21":"String",
+            "AUS_NAME21":"String",
+            "CHG_FLAG21":"String",
+            "CHG_LBL21":"String",
+            "LOCI_URI21":"String"
+        },
+        "maxzoom": 9,
+        "minzoom": 5,
+        "description": "ASGS 2021 suburb boundaries and coastline"
+    }
+  ],
+  "crs": "EPSG:3857",
+  "tiles": [
+    "https://360info-bushfire-prone-land.pages.dev/data/suburb-tiles/{z}/{x}/{y}.pbf"
+  ]
+}

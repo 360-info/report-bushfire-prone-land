@@ -1,0 +1,31 @@
+{
+  "id": "43f36e14-e3f5-43c1-84c0-50a9c80dc5c7",
+  "name": "suburbs-map-style",
+  "zoom": 2,
+  "pitch": 0,
+  "center": [
+    135,
+    -25
+  ],
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#97f1fc"
+      },
+      "filter": [
+        "all"
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "maxzoom": 24
+    }
+  ],
+  "bearing": 0,
+  "sources": { },
+  "version": 8,
+  "metadata": {
+  }
+}
