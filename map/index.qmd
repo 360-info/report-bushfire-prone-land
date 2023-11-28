@@ -2,7 +2,9 @@
 pagetitle: "Interactive: bushfire prone areas"
 description: What percentage of your suburb is at rusk?
 format:
-  360-embed-html: default
+  360-embed-html:
+    include-in-header:
+      - file: cf-beacon.html
 css:
   - https://cdn.jsdelivr.net/npm/maplibre-gl@2.1.9/dist/maplibre-gl.css
 twitter-card:
