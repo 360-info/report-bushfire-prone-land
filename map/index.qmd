@@ -4,10 +4,23 @@ format:
   360-embed-html: default
 css:
   - https://cdn.jsdelivr.net/npm/maplibre-gl@2.1.9/dist/maplibre-gl.css
+twitter-card:
+  site: "@360info_global"
+  # image: "/map/bpa-map-banner.png"
+open-graph:
+  # image: "/map/bpa-map-banner.png"
 resources:
-  # - news-heat-postcodes-featuremedia.png
+  # - bpa-map-banner.png
   - style.json
-  - stripes.png
+360embed:
+  before: |
+    &lt;div style=&quot;position:relative; padding-bottom: 75%&quot;&gt;
+    &lt;iframe allow=&quot;fullscreen; clipboard-write self https://dev-map.360info-bushfire-prone-land.pages.dev&quot; allowfullscreen=&quot;true&quot; src=&quot;
+  url: https://dev-map.360info-bushfire-prone-land.pages.dev/map/
+  after: |
+    &quot; title=&quot;Interactive: bushfire prone areas&quot; style=&quot;width:100%; height:100%; position: absolute; top: 0; left: 0; border:none; background-color: white;&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
+
 ---
 
 ```{ojs}
@@ -38,9 +51,39 @@ selectedState = {
 }
 selectedStateCode = allStates.indexOf(selectedState) + 1
 
+titles = ({
+  "NSW": "Bushfire Prone Areas: NSW",
+  "VIC": "Bushfire Prone Areas: VIC",
+  "QLD": "Bushfire Prone Areas: QLD",
+  "SA":  "Bushfire Protection Areas: SA",
+  "WA":  "Bushfire Prone Areas: WA",
+  "TAS": "Bushfire Prone Areas: TAS",
+  "NT":  "Fire Protection Zones: NT",
+  "ACT": "Bushfire Prone Areas: ACT"
+})
+
+subtitles = ({
+  "NSW":
+    "This map shows the percentage of your suburb with vegetation that could potentially support a bushfire.",
+  "VIC":
+    "This map shows the percentage of your suburb subject to — or likely to be subject to – bushfire.",
+  "QLD":
+    "This map shows the percentage of your suburb identified as potentially being subject to at least a medium potential bushfire intensity.",
+  "SA":
+    "This map shows the percentage of your suburb classified as at least general risk.",
+  "WA":
+    "This map shows the percentage of your suburb subject to — or likely to be subject to – bushfire attack.",
+  "TAS":
+    "This map shows the percentage of your suburb either designated as bushfire-prone by planning laws or, if there are none, near bushfire-prone vegetation.",
+  "NT":
+    "This map shows the percentage of your suburb designated a Fire Protection Zone. These are generally limited to the fringes of urban areas.",
+  "ACT":
+    "This map shows the percentage of your suburb assessed as being at high risk to life and property due to bushfires."
+})
+
 // display a customised title and subtitle based on selected state
-mapTitle = md`# Bushfire-prone land: ${selectedState}`
-mapSubtitle = md`Test subtitle here. This should reflect state rules.`
+mapTitle = md`# ${titles[selectedState]}`
+mapSubtitle = md`${subtitles[selectedState]}`
 
 // initial bounds
 initBounds = ({

@@ -13,7 +13,14 @@ These charts, as well as the analyses that underpin them, are available under a 
 
 Please acknowledge [360info](https://360info.org) and our data sources when you use these charts and data:
 
-* [NARCliM1.5: NSW DPIE](https://climatedata-beta.environment.nsw.gov.au/)
+* NSW: [RFS](https://datasets.seed.nsw.gov.au/dataset/bush-fire-prone-land)
+* VIC: [DEECA](https://discover.data.vic.gov.au/dataset/designated-bushfire-prone-area-bpa)
+* Qld: [QFES](https://www.data.qld.gov.au/dataset/bushfire-prone-area-queensland-series)
+* SA: [DTI](https://data.sa.gov.au/data/dataset/bushfire-protection-areas)
+* WA: [DFES](https://catalogue.data.wa.gov.au/dataset/bush-fire-prone-areas-2021-obrm-019)
+* TAS: [TPC](https://listdata.thelist.tas.gov.au/opendata)
+* NT: [Bushfires NT](https://nt.gov.au/emergency/bushfire/prepare-and-plan/fire-protection-zones)
+* ACT: [EPSD](https://actmapi-actgov.opendata.arcgis.com/datasets/7c4ae4305e6b43cfb2135cf7fde498f4/about)
 
 #### Embed this chart in your article
 
@@ -21,18 +28,11 @@ Copy and paste the following code:
 
 ::: {.embedcode}
 ```
-{{< var newsembed.before >}}{{< var newsembed.url >}}{{< var newsembed.after >}}
+{{< meta 360embed.before >}}{{< meta 360embed.url >}}?state=...{{< meta 360embed.after >}}
 ```
 :::
 
 This content is subject to [360info's Terms of Use](https://newshub.360info.org/page/terms).
-
-#### Get the data and code
-
-Visit the [GitHub repository](https://github.com/360-info/report-template/tree/main/data) to:
-
-* [**Download the data**](https://github.com/360-info/report-template/tree/main/data)
-* [**Recreate or remix the chart**](https://github.com/360-info/report-template)
 ::::
 
 :::::
@@ -52,13 +52,15 @@ Visit the [GitHub repository](https://github.com/360-info/report-template/tree/m
 </header>
 
 :::: {#modal-about-content}
-This map shows how a set of climate models estimate 35°C+ days will change across Australia in the coming decades. You can narrow in on a particular postcode.
+Each Australian state and territory maps out bushfire risk differently. Some mark out all areas with vegetation that can support a bushfire, while others choose to focus on the protection of populated areas.
 
-The data comes from [NARCliM1.5](https://doi.org/10.1029/2020EF001833), an experiment undertaking by the [NSW Department of Planning and Environment](https://www.dpie.nsw.gov.au) and the [Climate Change Research Centre](https://ccrc.unsw.edu.au).
+Regardless of their name, on this map, suburbs in [brown]{style="font-weight: bold; color: #993404"} have a **high percentage of areas marked for bushfire planning.**
 
-Because more than one climate models is used, we tell you the range of estimates among them.
+These areas are also used by firefighters and planning authorities to consider where the greatest risk may lie.
 
-NARCLiM1.5 is used by scientists to compare against an earlier version of NARCliM, which had slightly less warming. **These estimates should therefore be considered an upper bound.**
+Although rules vary, many states and territories legally require people building in bushfire prone areas (or similarly named areas) to meet a bushfire resilience standard.
+
+Some also impose obligations on landholders even if they aren't building.
 ::::
 
 :::::

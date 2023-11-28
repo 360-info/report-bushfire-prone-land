@@ -55,6 +55,21 @@
 ```
 :::
 
+```{ojs}
+//| label: sources
+
+sources = ({
+  "NSW": "RFS",
+  "VIC": "DEECA",
+  "QLD": "QFES",
+  "SA":  "DTI",
+  "WA":  "DFES",
+  "TAS": "TPC",
+  "NT":  "Bushfires NT",
+  "ACT": "EPSD"
+})
+```
+
 <!-- if there's room here, put credits on two lines:
   * Editor names, 360info (hint: put &shy; in the middle of long names!)
   * Data: ORG
@@ -63,7 +78,7 @@ James Goldie, 360info
 & Dean Marchiori,  
 Wave Data Labs
 
-Data: XXX
+${"Data:&nbsp;" + sources[selectedState]}
 
 ::::
 
@@ -97,9 +112,18 @@ Data: XXX
     
       edshareBtn.addEventListener("click", () => {
 
+        // get potential url fragment to add to embed code
+        const pageURL = new URL(window.location.href);
+        let fragments = [];
+        const stateChoice = pageURL.searchParams.get("state");
+        if (stateChoice !== undefined) {
+          fragments.push("month=" + stateChoice);
+        }
+        const fragmentString = fragments.join("&");
+
         // copy the embed code to the clipboard
         navigator.clipboard.writeText(
-          `{{< var newsembed.before >}}{{< var newsembed.url >}}{{< var newsembed.after >}}`);
+          `{{< meta 360embed.before >}}{{< meta 360embed.url >}}?${fragmentString}{{< meta 360embed.after >}}`);
 
         // update button styles and content
         edshareBtn.classList.remove("ready");
