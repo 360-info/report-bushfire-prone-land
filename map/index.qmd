@@ -1,6 +1,6 @@
 ---
 pagetitle: "Interactive: bushfire prone areas"
-description: What percentage of your suburb is at rusk?
+description: What percentage of your suburb is at risk?
 format:
   360-embed-html:
     include-in-header:
