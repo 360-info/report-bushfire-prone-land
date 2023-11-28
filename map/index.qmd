@@ -2,9 +2,7 @@
 pagetitle: "Interactive: bushfire prone areas"
 description: What percentage of your suburb is at risk?
 format:
-  360-embed-html:
-    include-in-header:
-      - file: cf-beacon.html
+  360-embed-html: default
 css:
   - https://cdn.jsdelivr.net/npm/maplibre-gl@2.1.9/dist/maplibre-gl.css
 twitter-card:
