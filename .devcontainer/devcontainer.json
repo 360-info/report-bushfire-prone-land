@@ -23,11 +23,11 @@
 		/* add apt packages (eg. system requirements for r packages) here.
 		   note that they are not frozen */
 		"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-			"packages": "libudunits2-dev,libxtst6,libxt6,libmagick++-dev,librsvg2-dev,libgdal-dev,libgeos-dev,libproj-dev"
+			"packages": "libudunits2-dev,libxtst6,libxt6,libmagick++-dev,librsvg2-dev,libicu-dev,libcurl4-openssl-dev,libssl-dev,libjpeg-dev,libpng-dev,libgdal-dev,gdal-bin,libgeos-dev,libproj-dev,libsqlite3-dev"
 		},
 		/* add additional r packages here */
 		"ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-			"packages": "github::rstudio/renv,tidyverse,sf,here,httpgd,janitor,github::360-info/themes360info"
+			"packages": "github::rstudio/renv,tidyverse,here,httpgd,janitor,github::360-info/themes360info,gganimate,ggmap,sf,geos,units"
 		}
 	}
 

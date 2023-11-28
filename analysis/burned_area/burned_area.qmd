@@ -1,6 +1,6 @@
 ---
-title: Fire History
-subtitle: A combined fires layer for NSW from all bush fire fighting agencies.
+title: Historical Bushfire Boundaries
+subtitle: Locations and extents of historical bushfires and burning events, from Geoscience Australia (GA).
 format:
   360-analysis-html: default
 author: Dean Marchiori
@@ -11,47 +11,89 @@ code-fold: true
 ```{r}
 library(tidyverse)
 library(sf)
-library(mapview)
 library(here)
+library(gganimate)
+library(themes360info)
 ```
 
-Read in data  
+Read in data. For source and info see `data/README.md`  
 
 ```{r}
 fires_raw <- read_sf(here("data/raw/fire_history/Historical_Bushfire_Boundaries.geojson"))
 ```
 
-Process data  
+
+Process data to keep SE Australia busfires only (not prescribed burns) from 2000 onwards. Many fires did not have an `ignition_date` so these were removed. 
 
 ```{r}
-
 fires <- fires_raw |>
     filter(
+        state %in% c(
+            "ACT (Australian Capital Territory)",
+            "NSW (New South Wales)",
+            "VIC (Victoria)",
+            "TAS (Tasmania)",
+            "QLD (Queensland)",
+            "SA (South Australia)"
+        ),
         fire_type == "Bushfire",
-        !is.na(ignition_date),
-        state == "NSW (New South Wales)"
+        !is.na(ignition_date)
     ) |>
     mutate(year = year(ignition_date)) |>
-    select(year)  |>
-    filter(year > 2000)  |>
-    st_make_valid()  |>
-    group_by(year)  |>
-    summarise(geometry = st_union(geometry))  |>
-    rmapshaper::ms_simplify(keep_shapes = TRUE)   
-
-library(gganimate)
-
-fires  |>
-st_set_crs(NA)  |>
-ggplot() +
-  geom_sf(aes(group = year), fill = "red", alpha = 0.4) +
-  theme_void() +
-  labs(title = "Year: {frame_time}") +
-  transition_time(year) +
-  gganimate::shadow_wake(0.25) 
-
-anim_save('out/map.gif')
+    select(year) |>
+    filter(year > 1980) |>
+    st_make_valid() |>
+    st_transform(3857) |>
+    group_by(year) |>
+    summarise(geometry = st_union(geometry)) |>
+    rmapshaper::ms_simplify(keep_shapes = TRUE)
 ```
 
+Making an animated map with a satellite basemap. The basemap from from the Google API and requires an API key.  
 
+```{r}
+# produce animation
+anim <- ggplot() +
+    geom_sf(data = fires, aes(group = year), fill = "red", lwd = 0, alpha = 0.4, inherit.aes = FALSE) +
+    theme_void() +
+    transition_time(year) +
+    gganimate::shadow_wake(0.1, wrap = FALSE, exclude_phase = NULL) +
+    labs(title = "Year: {round(frame_time,0)}") +
+    coord_sf(crs = st_crs(3857))
+
+animate(anim, renderer = file_renderer(dir = "data/final/anim"), nframes = 200, width = 6.4, height = 6, units = "in", res = 300, bg = "transparent")
+```
+
+## Additional WA zoom in  
+
+```{r}
+fires_wa <- fires_raw |>
+    filter(
+        state %in% c(
+            "WA (Western Australia)"
+        ),
+        fire_type == "Bushfire",
+        !is.na(ignition_date)
+    ) |>
+    mutate(year = year(ignition_date)) |>
+    select(year) |>
+    filter(year > 2000) |>
+    st_make_valid() |>
+    group_by(year) |>
+    summarise(geometry = st_union(geometry)) |>
+    rmapshaper::ms_simplify(keep_shapes = TRUE)  |>
+    st_transform(3857)
+
+anim_wa <- ggplot() +
+    geom_sf(data = fires_wa, aes(group = year), fill = "red", lwd = 0, alpha = 0.4, inherit.aes = FALSE) +
+    theme_void() +
+    transition_time(year) +
+    gganimate::shadow_wake(0.1, wrap = FALSE, exclude_phase = NULL) +
+    labs(title = "Year: {round(frame_time,0)}") +
+    coord_sf(crs = st_crs(3857))
+
+# export as a library of pngs
+animate(anim_wa, renderer = file_renderer(dir = "data/final/anim_wa"), width = 6.4, height = 6, units = "in", res = 300, bg = "transparent")
+
+```
 
