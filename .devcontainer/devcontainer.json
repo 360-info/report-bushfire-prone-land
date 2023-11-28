@@ -27,7 +27,7 @@
 		},
 		/* add additional r packages here */
 		"ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-			"packages": "github::rstudio/renv,tidyverse,here,httpgd,janitor,github::360-info/themes360info,gganimate,ggmap,sf,geos,units"
+			"packages": "github::rstudio/renv,tidyverse,here,httpgd,janitor,github::360-info/themes360info,cran/gganimate@1.0.7,ggmap,sf,geos,units,rmapshaper,cran/transformr@0.1.3"
 		}
 	}
 

@@ -19,11 +19,11 @@ library(themes360info)
 Read in data. For source and info see `data/README.md`  
 
 ```{r}
-fires_raw <- read_sf(here("data/raw/fire_history/Historical_Bushfire_Boundaries.geojson"))
+fires_raw <- read_sf(here("data", "raw", "fire_history",
+    "Historical_Bushfire_Boundaries.geojson"))
 ```
 
-
-Process data to keep SE Australia busfires only (not prescribed burns) from 2000 onwards. Many fires did not have an `ignition_date` so these were removed. 
+Process data to keep SE Australia bushfires only (not prescribed burns) from 2000 onwards. Many fires did not have an `ignition_date` so these were removed. 
 
 ```{r}
 fires <- fires_raw |>
@@ -49,19 +49,36 @@ fires <- fires_raw |>
     rmapshaper::ms_simplify(keep_shapes = TRUE)
 ```
 
-Making an animated map with a satellite basemap. The basemap from from the Google API and requires an API key.  
+
+```{r}
+#| label: aus-outline
+
+aus_coast <-
+    here("data", "raw", "fire_history", "aus-outline.gpkg") |>
+    read_sf()
+``` 
 
 ```{r}
 # produce animation
 anim <- ggplot() +
-    geom_sf(data = fires, aes(group = year), fill = "red", lwd = 0, alpha = 0.4, inherit.aes = FALSE) +
+    geom_sf(data = aus_coast, colour = "lightgrey", fill = NA, alpha = 0.4,
+        inherit.aes = FALSE) +
+    geom_sf(aes(group = year), data = fires, fill = "red", lwd = 0, alpha = 0.4,
+        inherit.aes = FALSE) +
     theme_void() +
     transition_time(year) +
     gganimate::shadow_wake(0.1, wrap = FALSE, exclude_phase = NULL) +
     labs(title = "Year: {round(frame_time,0)}") +
-    coord_sf(crs = st_crs(3857))
+    coord_sf(crs = st_crs(fires), datum = NA)
 
-animate(anim, renderer = file_renderer(dir = "data/final/anim"), nframes = 200, width = 6.4, height = 6, units = "in", res = 300, bg = "transparent")
+# export as a library of svgs
+animate(anim,
+    renderer = file_renderer(dir = here("data", "final", "anim")),
+    device = "svglite",
+    nframes = 200,
+    width = 6.4,
+    height = 6,
+    bg = "transparent")
 ```
 
 ## Additional WA zoom in  
@@ -85,15 +102,23 @@ fires_wa <- fires_raw |>
     st_transform(3857)
 
 anim_wa <- ggplot() +
-    geom_sf(data = fires_wa, aes(group = year), fill = "red", lwd = 0, alpha = 0.4, inherit.aes = FALSE) +
+    geom_sf(data = aus_coast, colour = "lightgrey", fill = NA, alpha = 0.4,
+        inherit.aes = FALSE) +
+    geom_sf(aes(group = year), data = fires_wa, fill = "red", alpha = 0.4,
+        inherit.aes = FALSE) +
     theme_void() +
     transition_time(year) +
     gganimate::shadow_wake(0.1, wrap = FALSE, exclude_phase = NULL) +
     labs(title = "Year: {round(frame_time,0)}") +
-    coord_sf(crs = st_crs(3857))
+    coord_sf(crs = st_crs(fires_wa))
 
-# export as a library of pngs
-animate(anim_wa, renderer = file_renderer(dir = "data/final/anim_wa"), width = 6.4, height = 6, units = "in", res = 300, bg = "transparent")
+# export as a library of svgs
+animate(anim_wa,
+    renderer = file_renderer(dir = "data", "final", "anim_wa"),
+    device = "svglite",
+    width = 6.4,
+    height = 6,
+    bg = "transparent")
 
 ```
 
