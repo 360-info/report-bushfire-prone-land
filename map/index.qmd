@@ -7,17 +7,17 @@ css:
   - https://cdn.jsdelivr.net/npm/maplibre-gl@2.1.9/dist/maplibre-gl.css
 twitter-card:
   site: "@360info_global"
-  image: "/map/bpa-map-banner.png"
+  image: "https://dec2023-news.360info-bushfire-prone-land.pages.dev/map/bpa-map-banner.png"
 open-graph:
-  image: "/map/bpa-map-banner.png"
+  image: "https://dec2023-news.360info-bushfire-prone-land.pages.dev/map/bpa-map-banner.png"
 resources:
   - bpa-map-banner.png
   - style.json
 360embed:
   before: |
     &lt;div style=&quot;position:relative; padding-bottom: 75%&quot;&gt;
-    &lt;iframe allow=&quot;fullscreen; clipboard-write self https://360info-bushfire-prone-land.pages.dev&quot; allowfullscreen=&quot;true&quot; src=&quot;
-  url: https://360info-bushfire-prone-land.pages.dev/map/
+    &lt;iframe allow=&quot;fullscreen; clipboard-write self https://dec2023-news.360info-bushfire-prone-land.pages.dev&quot; allowfullscreen=&quot;true&quot; src=&quot;
+  url: https://dec2023-news.360info-bushfire-prone-land.pages.dev/map/
   after: |
     &quot; title=&quot;Interactive: bushfire prone areas&quot; style=&quot;width:100%; height:100%; position: absolute; top: 0; left: 0; border:none; background-color: white;&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
     &lt;/div&gt;
