@@ -125,7 +125,8 @@
 
   /* to maintain readability over a map */
   z-index: 1000;
-  background-color: #ffffffcc;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  font-weight: bold;
 }
 
 .modalpanelitems {

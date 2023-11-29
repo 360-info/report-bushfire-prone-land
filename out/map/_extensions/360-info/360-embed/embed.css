@@ -21,7 +21,7 @@ a:visited {
   padding: 10px;
   z-index: 1000;
   color: color;
-  /* background: #00000088; */
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 .custom-title-block h1,
@@ -43,8 +43,19 @@ a:visited {
 
 /* shrink header elements at lower widths */
 @media (max-width: 45em) {
+  
   .custom-title-block {
-    font-size: 90%;
+    margin-right: 140px;
+  }
+  
+  .custom-title-block h1 
+  {
+    font-size: 130%;
+  }
+
+  .custom-title-block p 
+  {
+    font-size: 100%;
   }
 
   .inputForm {
@@ -54,8 +65,21 @@ a:visited {
 }
 
 @media (max-width: 34em) {
+  
   .custom-title-block {
+    margin-right: 120px;
+  }
+  
+  .custom-title-block h1 
+  {
+    font-size: 120%;
+  }
+
+  .custom-title-block p 
+  {
     font-size: 80%;
+    font-weight: bold;
+    text
   }
 
   .inputForm {
@@ -84,7 +108,7 @@ a:visited {
 #area-search-controls {
   z-index: 1000;
   position: absolute;
-  top: 12em;
+  top: 10em;
   left: 10px;
   color: black;
   padding: 0;
@@ -96,6 +120,13 @@ a:visited {
   border-radius: 8px;
   opacity: 1;
   transition: all 0.5s ease-in-out;
+}
+
+
+@media (max-width: 34em) {
+  #area-search-controls {
+    top: 50%;
+  }
 }
 
 #area-search-controls.hide {
