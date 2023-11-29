@@ -222,7 +222,7 @@ viewof map = {
         "<h3>" + e.features[0].properties.SAL_NAME21 + "</h3>" +
         "<p><strong>" + bfPercent + "</strong> " +
         "(about " + bfArea + " sq. km) " +
-        "is classified as bushfire-prone.</p>"
+        "is classified as " + terms[selectedState] + "</p>"
       
       // populate popup; locate based on mouse's back-projected position
       popup.setLngLat(e.lngLat).setHTML(dataMessage).addTo(map);
@@ -434,7 +434,18 @@ selectedSuburbPercent =
   selectedSuburbData[0].bf_area_pct.toLocaleString(undefined, {style: "percent"})
 selectedSuburbArea = (selectedSuburbData[0].bf_area || 0).toFixed(1)
 
-html`<p style="font-size: 125%"><strong>${selectedSuburbPercent}</strong> of ${selectedSuburbName} (about ${selectedSuburbArea} sq. km) is classified as bushfire-prone.</p>`
+terms = ({
+  "NSW": "a Bushfire Prone Area",
+  "VIC": "a Bushfire Prone Area",
+  "QLD": "a Bushfire Prone Area",
+  "SA":  "a Bushfire Protection Area",
+  "WA":  "a Bushfire Prone Area",
+  "TAS": "a Bushfire Prone Area",
+  "NT":  "Fire Protection Zone",
+  "ACT": "Bushfire Prone Area"
+})
+
+html`<p style="font-size: 125%"><strong>${selectedSuburbPercent}</strong> of ${selectedSuburbName} (about ${selectedSuburbArea} sq. km) is classified as ${terms[selectedState]}.</p>`
 ```
 
 ::::
