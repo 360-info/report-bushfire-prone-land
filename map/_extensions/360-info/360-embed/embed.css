@@ -225,6 +225,14 @@ a:visited {
   max-width: 400px;
 }
 
+@media (max-width: 34em) {
+
+  #modal-focused-suburb .modal__container {
+    transform: scale(0.65);
+    transform-origin: bottom;
+  }
+}
+
 #modal-focused-suburb h3 {
   text-transform: uppercase;
 }
