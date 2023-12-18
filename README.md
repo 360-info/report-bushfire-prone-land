@@ -1,6 +1,6 @@
 # Bushfire prone land
 
-### [📊&nbsp;Get&nbsp;the&nbsp;data](data) • [💻&nbsp;Reproduce&nbsp;the&nbsp;analysis](#-reproduce-the-analysis)
+### [📊&nbsp;Get&nbsp;the&nbsp;data](data) • [💻&nbsp;Reproduce&nbsp;the&nbsp;analysis](#-reproduce-the-analysis) • [🗺️&nbsp;See&nbsp;the&nbsp;maps](https://360info.org/maps-suburbs-most-at-risk-of-bushfires/)
 
 Visualises how much of each Australia suburb is covered by a state government "bushfire prone area", "fire protection area" or similarly named overlay. Also visualises areas touched by bushfire over the last 40 years.
 
