@@ -1,30 +1,16 @@
-# Bushfire Prone Land
+# Bushfire prone land
 
 ### [📊&nbsp;Get&nbsp;the&nbsp;data](data) • [💻&nbsp;Reproduce&nbsp;the&nbsp;analysis](#-reproduce-the-analysis)
 
-## Living with fire   
+Visualises how much of each Australia suburb is covered by a state government "bushfire prone area", "fire protection area" or similarly named overlay. Also visualises areas touched by bushfire over the last 40 years.
 
-As the climate heats up, severe fire weather is getting worse in many parts of the world.
-
-The effort of fighting fiercer fires for longer is putting strain on firefighting forces, and their resources with which to prepare are shrinking. They can no longer rely on backup from less affected countries, as northern and southern hemisphere fire seasons are beginning to overlap, and with fewer days in which to do prescribed burning, it’s getting harder to manage the fuel available for potential fires.
-
-For Australia, the return of El Niño and a positive Indian Ocean Dipole primes the country for hotter, drier conditions—and with them, higher fire danger. Many communities flagged for higher risk are still recovering from devastating floods last year.
-
-As the country prepares for a hot, dry summer, 360info looks at what’s changing and the lessons fire authorities are applying to fight the next set of fires.  
-
-## Bushfire Prone Land  
-
-This Australia-wide dataset combines all state and territory agency datasets describing land areas classified as 'Bushfire Prone'. Definitions and methodologies vary widely from state-to-state. This map attempts to unify the basic definitions to contrast policy and highlight considerations for planning, the built environment and living with fire.  
-
-![](img/img.png)
+![Exploratory map of bushfire prone areas](img/img.png)
 
 ## ♻️ Use + Remix rights
 
 ![[Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0)](https://mirrors.creativecommons.org/presskit/buttons/80x15/png/by.png)
 
 These charts, as well as the analyses that underpin them, are available under a Creative Commons Attribution 4.0 licence. This includes commercial reuse and derivates.
-
-<!-- Do any of the data sources fall under a different licence? If so, describe the licence and which parts of the data fall under it here! if most of it does, change the above and replace LICENCE.md too -->
 
 Data in these charts comes from:
 
@@ -38,11 +24,13 @@ Data in these charts comes from:
 
 This project comes with a ready-to-use [dev container](https://code.visualstudio.com/docs/remote/containers) that includes everything you need to reproduce the analysis (or do a similar one of your own!), including [R](https://r-project.org) and [Quarto](https://quarto.org).
 
-1. [Launch this project in GitHub Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=[report_codespaces_id])
-2. If you have Docker installed, you can build and run the container locally:
-  - Download or clone the project
-  - Open it in [Visual Studio Code](https://code.visualstudio.com)
-  - Run the **Remote-Containers: Reopen in Container** command
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/360-info/report-bushfire-prone-land?quickstart=1)
+
+Or, if you have Docker installed, you can build and run the container locally:
+
+- Download or clone the project
+- Open it in [Visual Studio Code](https://code.visualstudio.com)
+- Run the **Remote-Containers: Reopen in Container** command
 
 Once the container has launched (it might take a few minutes to set up the first time), you can run the analysis scripts with:
 

@@ -1,10 +1,51 @@
 # Data  
 
-## Raw Data  
+## `bf-prone-processed.csv`
 
-### Bushfire prone land datasets  
+Processed statistics on the fraction of each suburb that is covered by a state government "bushfire prone area", "fire protection area" or similarly named overlay.
 
-These data are the raw downloads from the state agencies  
+This Australia-wide dataset combines all state and territory agency datasets describing land areas classified as 'Bushfire Prone'. Definitions and methodologies vary widely from state-to-state. This map attempts to unify the basic definitions to contrast policy and highlight considerations for planning, the built environment and living with fire.
+
+Columns include:
+
+- `STE_CODE21`: state code from the Australian Bureau of Statistics
+- `STE_NAME21`: state name from the ABS
+- `SAL_CODE21`: suburb code from the ABS
+- `SAL_NAME21`: suburb code from the ABS
+- `area`: area of the suburb in square kilometres
+- `bf_area`: area of the suburb in square kilometres that is bushfire prone (or similar)
+- `bf_area_pct`: fraction of the suburb (0 to 1) that is bushfire prone (or similar)
+- `cent_lat`: latitude of the suburb's centroid (using the largest polygon)
+- `cent_lon`: longitude of the suburb's centroid (using the largest polygon)
+
+Produced by `/analysis/BFP`.
+
+## `/final/anim`, `/final/anim_wa`
+
+Processed image sequence (on a transparent background) of burnt areas of south-east Australia (`anim`) and Western Australia (`anim_wa`) over time, for compositing in video.
+
+Produced by `/analysis/burned_area`.
+
+## `/suburb-tiles`
+
+Vector tiles based on the Australian Bureau of Statistics' [ASGS Edition 3 Suburbs and Localities](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files) (licensed under [CC BY 4.0](https://www.abs.gov.au/website-privacy-copyright-and-disclaimer#copyright-and-creative-commons)).
+
+To generate the tiles from the ABS shapefile (assuming it has been downloaded as a shapefile and unzipped), use `ogr2ogr` and `tippecanoe`:
+
+```sh
+# convert shapefile to wgs84 geojson
+ogr2ogr -f GeoJSON suburbs.geojson SAL_2021_AUST_GDA2020_SHP/SAL_2021_AUST_GDA2020.shp
+
+# turn geojson into directory of tiles
+tippecanoe -zg --no-tile-compression --output-to-directory suburb-tiles suburbs.geojson
+```
+
+
+## Not included with the repository
+
+### Bushfire prone land datasets (`raw/fire_history`)
+
+These data are the raw downloads from the state agencies. They are not included with the repository, but the analysis scripts require them to be present.
 
 #### NSW  
 
@@ -95,7 +136,8 @@ These data are the raw downloads from the state agencies
 **Licence:** [Creative Commons Attribution 3.0 Australia](https://creativecommons.org/licenses/by/3.0/au/)   
 **Date Accessed:** 2023-08-10   
 
-### Historical Bushfire Boundaries   
+### Historical bushfire boundaries
+
 Locations and extents of historical bushfires and burning events, from Geoscience Australia (GA).  
 
 **file:** `data/fire_history/Historical_Bushfire_Boundaries.geojson`   
